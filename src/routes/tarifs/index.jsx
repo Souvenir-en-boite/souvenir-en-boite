@@ -15,7 +15,7 @@ export const Tarifs = () => {
               src="/assets/picture/tarif-mariage.avif"
               alt="Mariage"
               className="relative"
-            ></img>
+            />
             <Link to="/tarifs/mariage">
               <button className="font-mono w-1/2 bg-[#FFE2D6] text-[#7D7063] text-sm px-2 py-3 absolute bottom-0 hover:bg-white left-1/2 transform -translate-x-1/2 transition-colors duration-300 ease-in-out">
                 LES FORMULES MARIAGE
@@ -39,7 +39,7 @@ export const Tarifs = () => {
               className="relative"
             ></img>
             <Link to="/tarifs/grossesse">
-              <button className="font-mono bg-[#FFE2D6] text-[#7D7063] text-sm px-2 py-3 absolute bottom-0 hover:bg-white left-1/2 transform -translate-x-1/2 transition-colors duration-300 ease-in-out">
+              <button className="font-mono w-1/2 bg-[#FFE2D6] text-[#7D7063] text-sm px-2 py-3 absolute bottom-0 hover:bg-white left-1/2 transform -translate-x-1/2 transition-colors duration-300 ease-in-out">
                 LES FORMULES GROSSESSE
               </button>
             </Link>
@@ -61,7 +61,7 @@ export const Tarifs = () => {
               className="relative"
             ></img>
             <Link to="/tarifs/naissance">
-              <button className="font-mono bg-[#FFE2D6] text-[#7D7063] text-sm px-2 py-3 absolute bottom-0 hover:bg-white left-1/2 transform -translate-x-1/2 transition-colors duration-300 ease-in-out">
+              <button className="font-mono w-1/2 bg-[#FFE2D6] text-[#7D7063] text-sm px-2 py-3 absolute bottom-0 hover:bg-white left-1/2 transform -translate-x-1/2 transition-colors duration-300 ease-in-out">
                 LES FORMULES NAISSANCE
               </button>
             </Link>
@@ -90,7 +90,8 @@ export const Tarifs = () => {
                 className="absolute font-mono text-xs bg-[#FFE2D6] text-[#7D7063] px-2 py-1.5"
                 style={{
                   bottom: "10%",
-                  left: "-75%",
+                  right: "80%",
+                  width: "max-content",
                 }}
               >
                 LES FORMULES MARIAGE
@@ -111,7 +112,8 @@ export const Tarifs = () => {
                 className="absolute"
                 style={{
                   bottom: "10%",
-                  right: "-95%",
+                  left: "95%",
+                  width: "max-content",
                   transform: "translateX(-25%)",
                 }}
               >
@@ -136,7 +138,8 @@ export const Tarifs = () => {
                 className="absolute font-mono text-xs bg-[#FFE2D6] text-[#7D7063] px-2 py-1.5"
                 style={{
                   bottom: "10%",
-                  left: "-75%",
+                  right: "80%",
+                  width: "max-content",
                 }}
               >
                 LES FORMULES NAISSANCE

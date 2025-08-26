@@ -7,24 +7,24 @@ export const TarifsPregnancy = () => {
         {[
           {
             title: "SILVER",
-            price: "390 €",
+            price: "290 €",
             image: "/assets/picture/grossesse-silver.avif",
             reverse: false,
             features: [
-              "3 tenues (personnelles ou proposées par le studio)",
-              "5 photos retouchées",
-              "Remise des photos en format numérique",
+              "2 tenues (personnelles ou proposées en studio)",
+              "Remise de toutes les photos brut en format numérique",
+              "5 photos retouchées au choix",
             ],
           },
           {
             title: "GOLD",
-            price: "490 €",
+            price: "390 €",
             image: "/assets/picture/grossesse-gold.avif",
             reverse: true,
             features: [
-              "3 tenues (personnelles ou fournies par le studio)",
+              "3 tenues (personnelles ou proposées en studio)",
+              "Remise de toutes les photos brut en format numérique",
               "8 photos retouchées",
-              "Remise des photos en format numérique",
             ],
           },
           {
@@ -33,10 +33,10 @@ export const TarifsPregnancy = () => {
             image: "/assets/picture/grossesse-diamond.avif",
             reverse: false,
             features: [
-              "4 tenues (personnelles ou disponibles au studio)",
-              "10 photos retouchées",
-              "Remise des photos en format numérique",
-              "Livraison d’un livre photo 21 x 28 cm avec les images retouchées",
+              "4 tenues (personnelles ou proposées en studio)",
+              "Remise de toutes les photos brut en format numérique",
+              "12 photos retouchées",
+              "Création d’un livre photo 21 x 28 cm",
             ],
           },
         ].map(({ title, price, image, features, reverse }, index) => (
@@ -49,7 +49,7 @@ export const TarifsPregnancy = () => {
             <div className="w-1/2 md:w-[600px] text-[">
               <p className="text-xl md:text-4xl text-center">{title}</p>
               <p className="text-xl md:text-4xl text-center">{price}</p>
-              <ul className="list-disc text-[9px] md:text-[22px] mt-4 px-6 md:px-10">
+              <ul className="list-disc text-[14px] md:text-[22px] mt-4 px-6 md:px-10">
                 {features.map((f, i) => (
                   <li key={i}>{f}</li>
                 ))}
@@ -59,7 +59,7 @@ export const TarifsPregnancy = () => {
               <img
                 src={image}
                 alt={title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
           </div>
@@ -69,7 +69,7 @@ export const TarifsPregnancy = () => {
         <p className="text-[15px] md:text-[38px]">
           Les formules peuvent être personnalisés
         </p>
-        <p className="text-[9px] md:text-[22px] text-[#8B0000]">
+        <p className="text-[14px] text-center md:text-[22px] text-[#8B0000]">
           15% de reduction seront offert sur votre formule grossesse pour toute
           prestation naissance reservées.
         </p>

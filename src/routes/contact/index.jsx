@@ -12,11 +12,11 @@ export const Contact = () => {
     <div>
       <div className="px-10 flex flex-col items-center justify-center my-10 text-[#514033]">
         <h1 className="text-4xl mb-3">CONTACT</h1>
-        <p className="text-center mb-4">
+        <p className="text-center mb-4 text-2xl">
           Je serais ravie de répondre à vos questions et de discuter de vos
           projets.
-        </p>
-        <p>N'hésitez pas à me contacter.</p>
+        </p> 
+        <p className="text-2xl">N'hésitez pas à me contacter.</p>
       </div>
       <div className="md:grid md:grid-cols-2 text-[#514033] md:border-t border-[#514033]">
         <div className="hidden md:grid grid-cols-2 grid-rows-2 gap-10 items-center justify-end p-20 border-r border-[#514033]">
@@ -65,7 +65,7 @@ export const Contact = () => {
             </div>
           </div>
         </div>
-        <form action="https://formsubmit.co/anthony.suzanne@hotmail.fr" target="_blank" method="POST" className="p-20 font-[helvetica]">
+        <form action="https://formsubmit.co/anthony.suzanne@hotmail.fr" target="_blank" method="POST" className="p-5 md:p-20 font-[helvetica]">
           <div className="md:grid md:grid-cols-2 gap-4 mb-4">
             <div className="flex flex-col mb-4 md:mb-0">
               <label for="lastname">Nom</label>

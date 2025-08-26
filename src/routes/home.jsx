@@ -1,10 +1,11 @@
 export default function Home() {
     return (
         <div>
-            <div className="grid grid-cols-3 gap-2 md:gap-6 mx-4 md:mx-20 mb-4">
-                <img src="/assets/picture/home1.avif" alt="Home 1" className="w-full h-[200px] md:h-[600px] object-cover" />
-                <img src="/assets/picture/home2.avif" alt="Home 2" className="w-full h-[200px] md:h-[600px] object-cover" />
-                <img src="/assets/picture/home3.avif" alt="Home 3" className="w-full h-[200px] md:h-[600px] object-cover" />
+            {/* <div className="grid grid-cols-3 gap-2 md:gap-6 mx-4 md:mx-20 mb-4"> */}
+            <div className="flex justify-between mx-2 md:justify-around md:mx-8 mb-4">
+                <img src="/assets/picture/home1.avif" alt="Home 1" className="w-fit h-[200px] md:h-[600px] object-contain" />
+                <img src="/assets/picture/home2.avif" alt="Home 2" className="w-fit h-[200px] md:h-[600px] object-contain" />
+                <img src="/assets/picture/home3.avif" alt="Home 3" className="w-fit h-[200px] md:h-[600px] object-contain" />
             </div>
             <div className="flex flex-col md:grid md:grid-cols-[65%_35%] gap-6 bg-[#FDDDCD] py-12 px-6">
                 <div className="flex flex-col gap-6 md:text-lg">
@@ -18,7 +19,7 @@ export default function Home() {
                     <p>Contactez-moi et créons ensemble les images de votre histoire.</p>
                 </div>
                 <div className="p-4">
-                    <img src="/assets/picture/sarah.avif" alt="Sarah" className="w-full h-[600px] object-cover" />
+                    <img src="/assets/picture/sarah.avif" alt="Sarah" className="w-full h-[600px] object-contain" />
                 </div>
             </div>
         </div>

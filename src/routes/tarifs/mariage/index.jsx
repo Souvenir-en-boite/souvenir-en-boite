@@ -7,25 +7,25 @@ export const TarifsWedding = () => {
         {[
           {
             title: "SILVER",
-            price: "1500 €",
+            price: "1200 €",
             image: "/assets/picture/mariage-silver.avif",
             reverse: false,
             features: [
-              "Présence du photographe des préparatifs jusqu'à la pièce montée (jusqu'à 2h du matin maximum, puis 100 € par heure supplémentaire au-delà).",
-              "Remise de toutes les photos de l'événement sur clé USB.",
-              "20 photos retouchées livrées en format numérique.",
+              "Présence du photographe des préparatifs jusqu'à la pièce montée (jusqu'à 2h du matin maximum, puis 100 € par heure supplémentaire au-delà).",
+              "Remise de toutes les photos de l’événement sur clé USB (environ 500 photos).",
+              "25 photos retouchées livrées en format numérique.",
             ],
           },
           {
             title: "GOLD",
-            price: "1900 €",
+            price: "1500 €",
             image: "/assets/picture/mariage-gold.avif",
             reverse: true,
             features: [
-              "Présence du photographe des préparatifs jusqu'à la pièce montée (jusqu'à 2h du matin maximum, puis 100 € par heure supplémentaire au-delà).",
-              "Remise de toutes les photos de l'événement sur clé USB.",
+              "Présence du photographe des préparatifs jusqu'à la pièce montée (jusqu'à 2h du matin maximum, puis 100 € par heure supplémentaire au-delà).",
+              "Remise de toutes les photos de l’événement sur clé USB (environ 600 photos).",
               "30 photos retouchées livrées en format numérique.",
-              "Livre photo haut de gamme regroupant les photos retouchées, format 28 × 28 cm.",
+              "Livre photo haut de gamme regroupant les photos retouchées, format 28 × 21 cm.",
             ],
           },
           {
@@ -34,11 +34,11 @@ export const TarifsWedding = () => {
             image: "/assets/picture/mariage-diamond.avif",
             reverse: false,
             features: [
-              "Présence du photographe des préparatifs jusqu'à la pièce montée (jusqu'à 2h du matin maximum, puis 100 € par heure supplémentaire au-delà).",
-              "Remise de toutes les photos de l'événement sur clé USB.",
-              "30 photos retouchées livrées en format numérique.",
+              "Présence du photographe des préparatifs jusqu'à la pièce montée (jusqu'à 2h du matin maximum, puis 100 € par heure supplémentaire au-delà).",
+              "Remise de toutes les photos de l’événement sur clé USB (environ 600 photos).",
+              "50 photos retouchées livrées en format numérique.",
               "Livre photo haut de gamme regroupant les photos retouchées, format 42 × 28 cm.",
-              "Galerie web privée, permettant à vos invités de visualiser et télécharger directement les photos.",
+              "Galerie web, permettant à vos invités de visualiser et télécharger directement les photos.",
             ],
           },
         ].map(({ title, price, image, features, reverse }, index) => (
@@ -51,7 +51,7 @@ export const TarifsWedding = () => {
             <div className="w-1/2 md:w-[600px] text-[">
               <p className="text-xl md:text-4xl text-center">{title}</p>
               <p className="text-xl md:text-4xl text-center">{price}</p>
-              <ul className="list-disc text-[9px] md:text-[22px] mt-4 px-6 md:px-10">
+              <ul className="list-disc text-[14px] md:text-[22px] mt-4 px-6 md:px-10">
                 {features.map((f, i) => (
                   <li key={i}>{f}</li>
                 ))}
@@ -61,7 +61,7 @@ export const TarifsWedding = () => {
               <img
                 src={image}
                 alt={title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
           </div>
