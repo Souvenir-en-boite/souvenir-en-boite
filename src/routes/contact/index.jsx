@@ -65,7 +65,7 @@ export const Contact = () => {
             </div>
           </div>
         </div>
-        <form action="https://formsubmit.co/anthony.suzanne@hotmail.fr" target="_blank" method="POST" className="p-5 md:p-20 font-[helvetica]">
+        <form action="https://formsubmit.co/souvenir-en-boite@hotmail.com" target="_blank" method="POST" className="p-5 md:p-20 font-[helvetica]">
           <div className="md:grid md:grid-cols-2 gap-4 mb-4">
             <div className="flex flex-col mb-4 md:mb-0">
               <label for="lastname">Nom</label>
