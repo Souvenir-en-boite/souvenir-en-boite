@@ -84,7 +84,7 @@ export const PortfolioPregnancy = () => {
 
       {currentIndex !== undefined && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#FFFBF4]/90"
           onClick={closeModal}
         >
           <img
