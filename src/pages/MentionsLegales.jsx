@@ -1,0 +1,71 @@
+import { Seo } from '../components/Seo'
+import { PageTexte } from '../components/PageTexte'
+import { site } from '../data/site'
+
+/**
+ * ⚠️ À COMPLÉTER AVANT MISE EN LIGNE
+ * Les mentions légales sont obligatoires (article 6 de la LCEN). Les champs
+ * entre crochets doivent être renseignés par la cliente : sans eux, la page
+ * ne remplit pas son obligation.
+ */
+export default function MentionsLegales() {
+  return (
+    <>
+      <Seo
+        chemin="/mentions-legales"
+        titre="Mentions légales"
+        description={`Mentions légales du site ${site.nom}, photographe mariage, grossesse et naissance.`}
+        noindex
+      />
+      <PageTexte titre="Mentions légales">
+        <h2>Éditeur du site</h2>
+        <ul>
+          <li><strong>Dénomination :</strong> {site.nom}</li>
+          <li><strong>Responsable de la publication :</strong> {site.photographe} [NOM DE FAMILLE À COMPLÉTER]</li>
+          <li><strong>Statut juridique :</strong> [ex. entrepreneur individuel / micro-entreprise — À COMPLÉTER]</li>
+          <li><strong>Adresse du siège :</strong> [ADRESSE POSTALE À COMPLÉTER]</li>
+          <li><strong>SIRET :</strong> [NUMÉRO SIRET À COMPLÉTER]</li>
+          <li><strong>Numéro de TVA intracommunautaire :</strong> [À COMPLÉTER ou mentionner « TVA non applicable, article 293 B du CGI »]</li>
+          <li><strong>Téléphone :</strong> <a href={`tel:${site.telephoneLien}`}>{site.telephone}</a></li>
+          <li><strong>E-mail :</strong> <a href={`mailto:${site.email}`}>{site.email}</a></li>
+        </ul>
+
+        <h2>Hébergement</h2>
+        <ul>
+          <li><strong>Hébergeur :</strong> [NOM DE L'HÉBERGEUR À COMPLÉTER]</li>
+          <li><strong>Adresse :</strong> [ADRESSE DE L'HÉBERGEUR À COMPLÉTER]</li>
+          <li><strong>Téléphone :</strong> [TÉLÉPHONE DE L'HÉBERGEUR À COMPLÉTER]</li>
+        </ul>
+
+        <h2>Propriété intellectuelle</h2>
+        <p>
+          L'ensemble des photographies, textes et éléments graphiques présents
+          sur ce site est la propriété exclusive de {site.nom}, sauf mention
+          contraire. Toute reproduction, représentation, modification ou
+          diffusion, totale ou partielle, sans autorisation écrite préalable
+          est interdite et constitue une contrefaçon au sens des articles
+          L.335-2 et suivants du Code de la propriété intellectuelle.
+        </p>
+        <p>
+          Les personnes photographiées ont donné leur accord pour la diffusion
+          de leur image sur ce site. Toute demande de retrait peut être adressée
+          à <a href={`mailto:${site.email}`}>{site.email}</a>.
+        </p>
+
+        <h2>Données personnelles</h2>
+        <p>
+          Le traitement des données transmises via le formulaire de contact est
+          décrit dans la{' '}
+          <a href="/politique-de-confidentialite">politique de confidentialité</a>.
+        </p>
+
+        <h2>Litiges</h2>
+        <p>
+          Le présent site est soumis au droit français. En cas de litige, et
+          après une tentative de résolution amiable, les tribunaux français
+          seront seuls compétents.
+        </p>
+      </PageTexte>
+    </>
+  )
+}

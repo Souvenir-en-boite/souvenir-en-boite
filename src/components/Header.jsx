@@ -1,203 +1,166 @@
-import { Link, useLocation } from "@tanstack/react-router";
-import { ChevronDown, ChevronLeft, ChevronUp, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Menu, X } from 'lucide-react'
+import { Container, Bouton } from './ui'
+import { IconAppareilPhoto } from './icons'
+import { navigation, site } from '../data/site'
 
-export const Header = () => {
-  const location = useLocation();
-  const pathname = location.pathname;
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [showPortfolioMenu, setShowPortfolioMenu] = useState(false);
-  const [showTarifsMenu, setShowTarifsMenu] = useState(false);
+function Marque({ className = '' }) {
+  return (
+    <Link
+      to="/"
+      className={`flex items-center gap-3 text-ink ${className}`}
+      aria-label={`${site.nom} — retour à l'accueil`}
+    >
+      <IconAppareilPhoto className="h-9 w-9 shrink-0" />
+      <span className="font-display text-lg leading-[1.05] tracking-wide sm:text-xl">
+        <span className="block">SOUVENIR</span>
+        <span className="block">EN BOÎTE</span>
+      </span>
+    </Link>
+  )
+}
+
+const lienClasses = ({ isActive }) =>
+  `eyebrow relative py-2 transition-colors ${
+    isActive ? 'text-ink' : 'text-ink-soft hover:text-ink'
+  } after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:bg-taupe-dark after:transition-transform after:duration-300 ${
+    isActive ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'
+  }`
+
+export function Header() {
+  const [ouvert, setOuvert] = useState(false)
+  const panneauRef = useRef(null)
+  const declencheurRef = useRef(null)
+  const { pathname } = useLocation()
+
+  // Referme le menu à chaque changement de page.
+  useEffect(() => setOuvert(false), [pathname])
+
+  useEffect(() => {
+    if (!ouvert) return
+
+    const panneau = panneauRef.current
+    const focusables = panneau.querySelectorAll('a[href], button:not([disabled])')
+    focusables[0]?.focus()
+
+    // Empêche la page de défiler derrière le menu ouvert.
+    const overflowInitial = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    // Échap ferme, Tab reste enfermé dans le panneau : sans ça, le focus
+    // part sur la page cachée derrière et l'utilisateur au clavier se perd.
+    const surTouche = (e) => {
+      if (e.key === 'Escape') {
+        setOuvert(false)
+        return
+      }
+      if (e.key !== 'Tab' || focusables.length === 0) return
+      const premier = focusables[0]
+      const dernier = focusables[focusables.length - 1]
+      if (e.shiftKey && document.activeElement === premier) {
+        e.preventDefault()
+        dernier.focus()
+      } else if (!e.shiftKey && document.activeElement === dernier) {
+        e.preventDefault()
+        premier.focus()
+      }
+    }
+
+    document.addEventListener('keydown', surTouche)
+    return () => {
+      document.removeEventListener('keydown', surTouche)
+      document.body.style.overflow = overflowInitial
+      // Rend le focus au bouton qui a ouvert le menu.
+      declencheurRef.current?.focus()
+    }
+  }, [ouvert])
 
   return (
     <>
-      <header className="flex items-center justify-center md:gap-10 p-4 mb-10 md:mb-20 font-bold">
-        <div className="flex max-sm:flex-1 justify-center items-center">
-          <Link to="/">
-            <img
-              src="/assets/picture/logo.avif"
-              alt="souvenir en boite"
-              className="w-[178px]"
-            />
-          </Link>
+      <header className="sticky top-0 z-40 border-b border-line bg-cream/95 backdrop-blur-sm">
+      <Container className="flex items-center justify-between gap-6 py-4">
+        <Marque />
+
+        <nav aria-label="Navigation principale" className="hidden lg:block">
+          <ul className="flex items-center gap-8">
+            {navigation.map((item) => (
+              <li key={item.to}>
+                <NavLink to={item.to} end={item.to === '/'} className={lienClasses}>
+                  {item.libelle}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Enveloppe plutôt que `hidden` sur le bouton : le composant Bouton
+            applique déjà `inline-flex`, et les deux utilitaires de display
+            entreraient en conflit dans la feuille de style. */}
+        <div className="hidden lg:block">
+          <Bouton to="/contact">Réserver une séance</Bouton>
         </div>
 
-        <div className="md:flex flex-col hidden">
-          <div className="flex gap-5 relative">
-            <Link to="/">
-              <button
-                className={`p-2.5 hover:border-t hover:border-b border-black uppercase ${
-                  pathname === "/" ? "border-t border-b" : ""
-                }`}
-              >
-                Accueil
-              </button>
-            </Link>
-
-            {/* Portfolio */}
-            <div className="relative group">
-              <Link to="/portfolio">
-                <button
-                  className={`p-2.5 hover:border-t hover:border-b border-black uppercase ${
-                    pathname.includes("portfolio") ? "border-t border-b" : ""
-                  }`}
-                >
-                  Portfolio
-                </button>
-              </Link>
-              <div className="absolute left-0 mt-2 flex gap-5 border-b border-black p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
-                <Link to="/portfolio/mariage">
-                  <button className="hover:text-red-300">MARIAGE</button>
-                </Link>
-                <Link to="/portfolio/grossesse">
-                  <button className="hover:text-red-300">GROSSESSE</button>
-                </Link>
-                <Link to="/portfolio/naissance">
-                  <button className="hover:text-red-300">NAISSANCE</button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Tarifs */}
-            <div className="relative group">
-              <Link to="/tarifs">
-                <button
-                  className={`p-2.5 hover:border-t hover:border-b border-black uppercase ${
-                    pathname.includes("tarifs") ? "border-t border-b" : ""
-                  }`}
-                >
-                  Tarifs
-                </button>
-              </Link>
-              <div className="absolute left-0 mt-2 flex gap-5 border-b border-black p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
-                <Link to="/tarifs/mariage">
-                  <button className="hover:text-red-300">MARIAGE</button>
-                </Link>
-                <Link to="/tarifs/grossesse">
-                  <button className="hover:text-red-300">GROSSESSE</button>
-                </Link>
-                <Link to="/tarifs/naissance">
-                  <button className="hover:text-red-300">NAISSANCE</button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Contact */}
-            <Link to="/contact">
-              <button
-                className={`p-2.5 hover:border-t hover:border-b border-black uppercase ${
-                  pathname.includes("contact") ? "border-t border-b" : ""
-                }`}
-              >
-                Contact
-              </button>
-            </Link>
-          </div>
-        </div>
-
-        {/* Icône Menu Mobile */}
-        <div className="md:hidden">
-          <button onClick={() => setShowMobileMenu(true)}>
-            <Menu />
-          </button>
-        </div>
+        <button
+          ref={declencheurRef}
+          type="button"
+          onClick={() => setOuvert(true)}
+          className="-mr-2 p-2 text-ink lg:hidden"
+          aria-expanded={ouvert}
+          aria-controls="menu-mobile"
+        >
+          <Menu className="h-7 w-7" aria-hidden="true" />
+          <span className="sr-only">Ouvrir le menu</span>
+        </button>
+        </Container>
       </header>
 
-      {/* MODALE MOBILE MENU */}
-      {showMobileMenu && (
-        <div className="fixed inset-0 bg-[#FFFBF4] z-50 flex flex-col items-end p-4">
-          {/* Bouton de fermeture */}
-          <button
-            onClick={() => setShowMobileMenu(false)}
-            className="text-black"
-          >
-            <X size={32} />
-          </button>
-
-          {/* Contenu de la modale */}
-          <div className="flex-1 w-full flex flex-col justify-center items-center gap-20 text-2xl uppercase  font-[helvetica]">
-            <Link to="/" onClick={() => setShowMobileMenu(false)}>
-              Accueil
-            </Link>
-
-            {/* Portfolio - Menu mobile */}
-            <div className="flex flex-col items-center">
-              <div className="flex items-center gap-3">
-                {showPortfolioMenu ? (
-                  <ChevronUp onClick={() => setShowPortfolioMenu(false)} />
-                ) : (
-                  <ChevronDown onClick={() => setShowPortfolioMenu(true)} />
-                )}
-                <Link to="/portfolio" onClick={() => setShowMobileMenu(false)}>
-                  Portfolio
-                </Link>
-              </div>
-              {showPortfolioMenu && (
-                <div className="flex flex-col items-center gap-10 mt-10">
-                  <Link
-                    to="/portfolio/mariage"
-                    onClick={() => setShowMobileMenu(false)}
-                  >
-                    MARIAGE
-                  </Link>
-                  <Link
-                    to="/portfolio/grossesse"
-                    onClick={() => setShowMobileMenu(false)}
-                  >
-                    GROSSESSE
-                  </Link>
-                  <Link
-                    to="/portfolio/naissance"
-                    onClick={() => setShowMobileMenu(false)}
-                  >
-                    NAISSANCE
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            {/* Tarifs - Menu mobile */}
-            <div className="flex flex-col items-center gap-3">
-              <div className="flex items-center gap-3">
-                {showTarifsMenu ? (
-                  <ChevronUp onClick={() => setShowTarifsMenu(false)} />
-                ) : (
-                  <ChevronDown onClick={() => setShowTarifsMenu(true)} />
-                )}
-                <Link to="/tarifs" onClick={() => setShowMobileMenu(false)}>
-                  Tarifs
-                </Link>
-              </div>
-              {showTarifsMenu && (
-                <div className="flex flex-col items-center gap-10 mt-10">
-                  <Link
-                    to="/tarifs/mariage"
-                    onClick={() => setShowMobileMenu(false)}
-                  >
-                    MARIAGE
-                  </Link>
-                  <Link
-                    to="/tarifs/grossesse"
-                    onClick={() => setShowMobileMenu(false)}
-                  >
-                    GROSSESSE
-                  </Link>
-                  <Link
-                    to="/tarifs/naissance"
-                    onClick={() => setShowMobileMenu(false)}
-                  >
-                    NAISSANCE
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            <Link to="/contact" onClick={() => setShowMobileMenu(false)}>
-              Contact
-            </Link>
+      {/* Rendu HORS de <header> : `backdrop-blur` sur l'en-tête en fait un bloc
+          conteneur pour les descendants en `position: fixed`, ce qui enfermait
+          le panneau dans la hauteur de la barre au lieu de couvrir l'écran. */}
+      {ouvert && (
+        <div
+          id="menu-mobile"
+          ref={panneauRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu de navigation"
+          className="fixed inset-0 z-50 flex flex-col bg-cream lg:hidden"
+        >
+          <div className="flex items-center justify-between border-b border-line px-5 py-4 sm:px-8">
+            <Marque />
+            <button
+              type="button"
+              onClick={() => setOuvert(false)}
+              className="-mr-2 p-2 text-ink"
+            >
+              <X className="h-7 w-7" aria-hidden="true" />
+              <span className="sr-only">Fermer le menu</span>
+            </button>
           </div>
+
+          <nav aria-label="Navigation principale" className="flex-1 overflow-y-auto px-5 py-10 sm:px-8">
+            <ul className="flex flex-col gap-7">
+              {navigation.map((item) => (
+                <li key={item.to}>
+                  <NavLink
+                    to={item.to}
+                    end={item.to === '/'}
+                    className={({ isActive }) =>
+                      `font-display text-3xl ${isActive ? 'text-taupe-dark' : 'text-ink'}`
+                    }
+                  >
+                    {item.libelle}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+            <Bouton to="/contact" className="mt-12 w-full">
+              Réserver une séance
+            </Bouton>
+          </nav>
         </div>
       )}
     </>
-  );
-};
+  )
+}
