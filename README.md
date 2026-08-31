@@ -71,7 +71,15 @@ structurées valides, aucun lien sans intitulé.
 
 ## Mise en ligne
 
-Publier le dossier `dist/`. Le build produit également :
+Le site est déployé sur **Vercel** (`souvenir-en-boite.vercel.app`). La
+configuration est dans `vercel.json` : elle impose `dist` comme dossier de
+sortie et désactive la détection automatique, qui identifiait l'ancien projet
+comme Create React App et cherchait un dossier `build`.
+
+Les redirections des anciennes adresses y sont déclarées aussi : Vercel ne lit
+pas le fichier `_redirects`, qui est un format Netlify / Cloudflare Pages.
+
+Le build produit également :
 
 - `sitemap.xml` et `robots.txt` ;
 - `_redirects` — redirections 301 des anciennes adresses (`/tarifs/*` vers
