@@ -56,33 +56,44 @@ export default function Contact() {
         description="Une question, un projet, une date à réserver ? Écrivez-moi, je réponds sous 24 h. Photographe disponible en France entière."
       />
 
-      {/* Bandeau d'ouverture */}
-      <section className="relative isolate flex min-h-[18rem] items-end overflow-hidden lg:min-h-[24rem] lg:items-center">
+      {/*
+        Bandeau d'ouverture.
+
+        La photo n'occupe que la droite du bandeau, pas toute sa largeur : à
+        cette taille son format (2,4:1) correspond presque exactement à la case
+        qui l'accueille, donc elle s'affiche quasiment entière. Étalée sur toute
+        la largeur, elle était forcément rognée des deux tiers en hauteur et on
+        n'en voyait qu'une tranche.
+
+        Le fond de section est noir plein ; un court dégradé adoucit la couture
+        avec le bord gauche de la photo.
+      */}
+      <section className="relative isolate flex min-h-[20rem] items-end overflow-hidden bg-[#0e0c0b] lg:min-h-[32rem] lg:items-center">
         <img
           src={heroContact.src}
           alt={heroContact.alt}
           width={heroContact.width}
           height={heroContact.height}
           fetchpriority="high"
-          className="absolute inset-0 -z-10 h-full w-full object-cover"
+          className="absolute inset-y-0 right-0 -z-10 h-full w-full object-cover lg:w-[68%]"
         />
         <div
-          // Panneau noir franc sur le tiers gauche, puis plus rien : la photo
-          // garde sa lumière à droite. Un dégradé étalé sur toute la largeur
-          // ternissait l'image entière sans jamais donner un vrai noir.
-          className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(14,12,11,.96)_0%,rgba(14,12,11,.82)_38%,rgba(14,12,11,.25)_70%,rgba(14,12,11,0)_100%)] lg:bg-[linear-gradient(90deg,rgba(14,12,11,.97)_0%,rgba(14,12,11,.94)_24%,rgba(14,12,11,.5)_40%,rgba(14,12,11,0)_56%)]"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(14,12,11,.96)_0%,rgba(14,12,11,.93)_52%,rgba(14,12,11,.66)_78%,rgba(14,12,11,.38)_100%)] lg:bg-[linear-gradient(90deg,#0e0c0b_0%,#0e0c0b_29%,rgba(14,12,11,.82)_36%,rgba(14,12,11,0)_48%)]"
           aria-hidden="true"
         />
         <Container className="py-12 lg:py-16">
-          <p className="eyebrow text-cream/85">Parlons de vos souvenirs</p>
-          <h1 className="mt-4 font-display text-4xl text-cream sm:text-5xl lg:text-6xl">
-            Contactez-moi.
-          </h1>
-          <p className="mt-5 max-w-lg text-sm leading-relaxed text-cream/90">
-            Vous avez une question, un projet, ou vous souhaitez réserver une
-            séance ? Je serai ravie d'échanger avec vous et de créer ensemble
-            des souvenirs qui vous ressemblent.
-          </p>
+          {/* Contenu maintenu dans la zone noire pour rester lisible. */}
+          <div className="lg:max-w-[26rem]">
+            <p className="eyebrow text-cream/85">Parlons de vos souvenirs</p>
+            <h1 className="mt-4 font-display text-4xl text-cream sm:text-5xl">
+              Contactez-moi.
+            </h1>
+            <p className="mt-5 max-w-lg text-sm leading-relaxed text-cream/90 lg:max-w-none">
+              Vous avez une question, un projet, ou vous souhaitez réserver une
+              séance ? Je serai ravie d'échanger avec vous et de créer ensemble
+              des souvenirs qui vous ressemblent.
+            </p>
+          </div>
         </Container>
       </section>
 
