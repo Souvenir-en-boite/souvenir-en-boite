@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { Instagram, Facebook, Phone, MapPin, Clock, Heart, ArrowRight } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { Container, Eyebrow } from '../components/ui'
@@ -34,6 +35,19 @@ function Champ({ id, label, type = 'text', requis = false, autoComplete, ...rest
 }
 
 export default function Contact() {
+  const retourRef = useRef(null)
+
+  // FormSubmit exige une URL absolue pour `_next` : impossible de la deviner
+  // au moment de la génération du site. On la recale sur le domaine réellement
+  // visité, sinon un changement de domaine renverrait l'internaute vers une
+  // page d'erreur APRÈS l'envoi — le message part, mais il croit avoir échoué.
+  // La valeur pré-générée sert de repli si JavaScript est désactivé.
+  useEffect(() => {
+    if (retourRef.current) {
+      retourRef.current.value = `${window.location.origin}/merci`
+    }
+  }, [])
+
   return (
     <>
       <Seo
@@ -145,7 +159,7 @@ export default function Contact() {
               <input type="hidden" name="_subject" value="Nouveau message depuis souvenir-en-boite.fr" />
               <input type="hidden" name="_template" value="table" />
               <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_next" value={`${site.url}/merci`} />
+              <input ref={retourRef} type="hidden" name="_next" value={`${site.url}/merci`} />
               <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
               <div className="grid gap-6 sm:grid-cols-2">
