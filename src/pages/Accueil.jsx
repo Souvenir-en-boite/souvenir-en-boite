@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { Seo, DonneesStructurees } from '../components/Seo'
 import { Container, Bouton, Eyebrow } from '../components/ui'
-import { icones, IconAppareilPhoto } from '../components/icons'
+import { IconAppareilPhoto } from '../components/icons'
+import { CarteUnivers } from '../components/CarteUnivers'
 import { Avis } from '../components/Avis'
 import { univers, heroAccueil } from '../data/site'
 
@@ -59,47 +60,6 @@ function Hero() {
   )
 }
 
-function CarteUnivers({ item }) {
-  const Icone = icones[item.cle]
-  return (
-    <li className="group relative isolate overflow-hidden">
-      <img
-        src={item.couverture}
-        alt={item.couvertureAlt}
-        width={item.largeur}
-        height={item.hauteur}
-        loading="lazy"
-        decoding="async"
-        style={{ objectPosition: item.cadrage ?? 'center' }}
-        className="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-      />
-      <div
-        className="absolute inset-0 -z-10 bg-linear-to-t from-night/90 via-night/50 to-night/20"
-        aria-hidden="true"
-      />
-
-      <div className="flex min-h-[19rem] flex-col justify-end p-7 text-cream lg:min-h-[25rem]">
-        <Icone className="h-10 w-10 text-cream/85" />
-        <h3 className="mt-5 font-display text-3xl uppercase tracking-wide lg:text-4xl">
-          {item.titre}
-        </h3>
-        <p className="mt-3 max-w-[16rem] text-sm leading-relaxed whitespace-pre-line text-cream/85">
-          {item.accroche}
-        </p>
-        <Link
-          to={`/portfolio/${item.cle}`}
-          // Pseudo-élément étiré sur toute la carte : elle devient cliquable
-          // partout, sans second lien dans l'arbre d'accessibilité.
-          className="eyebrow mt-6 inline-flex w-fit items-center gap-3 border-b border-cream/50 pb-1 transition-colors hover:border-cream after:absolute after:inset-0 after:content-['']"
-        >
-          Voir la galerie
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-          <span className="sr-only">— {item.titre}</span>
-        </Link>
-      </div>
-    </li>
-  )
-}
 
 function BandeauContact() {
   return (
@@ -142,7 +102,7 @@ export default function Accueil() {
           </h2>
           <ul className="grid gap-2.5 lg:grid-cols-3">
             {univers.map((item) => (
-              <CarteUnivers key={item.cle} item={item} />
+              <CarteUnivers key={item.cle} item={item} vers={`/portfolio/${item.cle}`} />
             ))}
           </ul>
         </Container>
