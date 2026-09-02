@@ -57,16 +57,20 @@ export default function Contact() {
       />
 
       {/*
-        Bandeau d'ouverture : bande large et courte, à la hauteur des bandeaux
-        des autres pages.
+        Bandeau d'ouverture.
 
-        La photo couvre toute la largeur et le noir se fond dedans par un
-        dégradé progressif. Une photo cantonnée à droite créait une coupure
-        nette, sans transition — ce n'est pas ce que fait la maquette.
+        `object-contain` sur grand écran : la photo s'affiche ENTIÈRE, calée à
+        droite. Avec `object-cover` elle était forcément rognée — c'est ce qui
+        donnait une tranche zoomée quel que soit le dégradé par-dessus.
 
-        Le fichier est recadré en 2,6:1, proche du rapport du bandeau, pour
-        limiter le rognage vertical. `object-position` pousse le cadrage vers
-        la droite : la gauche disparaît sous le noir de toute façon.
+        Le noir à gauche est un panneau flouté qui déborde sur le bord gauche de
+        la photo. Le flou fait la transition à la place d'un dégradé : pas de
+        frontière visible, et la matière de la photo transparaît légèrement.
+        Il déborde en haut, en bas et à gauche pour que seul son bord droit,
+        adouci, soit visible.
+
+        Sur mobile la photo reste en `cover` : `contain` laisserait de larges
+        bandes vides sur un écran étroit.
       */}
       <section className="relative isolate flex min-h-[20rem] items-end overflow-hidden bg-[#0e0c0b] lg:min-h-[25rem] lg:items-center">
         <img
@@ -75,14 +79,20 @@ export default function Contact() {
           width={heroContact.width}
           height={heroContact.height}
           fetchpriority="high"
-          className="absolute inset-0 -z-10 h-full w-full object-cover object-center lg:object-right"
+          className="absolute inset-0 -z-10 h-full w-full object-cover object-center lg:object-contain lg:object-right"
+        />
+
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-24 -left-24 -top-24 right-[62%] -z-10 hidden bg-[#0e0c0b] blur-[70px] lg:block"
         />
         <div
-          className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(14,12,11,.96)_0%,rgba(14,12,11,.92)_50%,rgba(14,12,11,.62)_78%,rgba(14,12,11,.35)_100%)] lg:bg-[linear-gradient(90deg,#0e0c0b_0%,rgba(14,12,11,.96)_16%,rgba(14,12,11,.78)_28%,rgba(14,12,11,.4)_38%,rgba(14,12,11,.12)_46%,rgba(14,12,11,0)_54%)]"
           aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(14,12,11,.96)_0%,rgba(14,12,11,.92)_50%,rgba(14,12,11,.62)_78%,rgba(14,12,11,.35)_100%)] lg:bg-none"
         />
+
         <Container className="py-12 lg:py-14">
-          <div className="lg:max-w-[26rem]">
+          <div className="lg:max-w-[24rem]">
             <p className="eyebrow text-cream/85">Parlons de vos souvenirs</p>
             <h1 className="mt-4 font-display text-4xl text-cream sm:text-5xl">
               Contactez-moi.
