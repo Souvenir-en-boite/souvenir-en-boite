@@ -15,14 +15,15 @@ export default function NonTrouvee() {
         eyebrow="Erreur 404"
         titre="Cette page n'existe plus"
         chapo="Le lien que vous avez suivi est peut-être ancien, ou la page a été déplacée lors de la refonte du site."
-      >
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-          <Bouton to="/">Retour à l'accueil</Bouton>
-          <Bouton to="/portfolio" variante="contourSombre">
-            Voir le portfolio
-          </Bouton>
-        </div>
-      </PageTexte>
+        actions={
+          <>
+            <Bouton to="/">Retour à l'accueil</Bouton>
+            <Bouton to="/portfolio" variante="contourSombre">
+              Voir le portfolio
+            </Bouton>
+          </>
+        }
+      />
     </>
   )
 }

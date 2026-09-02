@@ -16,14 +16,15 @@ export default function Merci() {
         eyebrow="Message envoyé"
         titre="Merci pour votre message !"
         chapo="Je l'ai bien reçu et je vous réponds sous 24 h. En attendant, n'hésitez pas à parcourir les galeries."
-      >
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-          <Bouton to="/portfolio">Voir le portfolio</Bouton>
-          <Bouton to="/" variante="contourSombre">
-            Retour à l'accueil
-          </Bouton>
-        </div>
-      </PageTexte>
+        actions={
+          <>
+            <Bouton to="/portfolio">Voir le portfolio</Bouton>
+            <Bouton to="/" variante="contourSombre">
+              Retour à l'accueil
+            </Bouton>
+          </>
+        }
+      />
     </>
   )
 }

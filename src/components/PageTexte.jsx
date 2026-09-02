@@ -1,7 +1,14 @@
 import { Container, Eyebrow } from './ui'
 
-/** Gabarit des pages de contenu rédactionnel (légal, confirmation, erreur). */
-export function PageTexte({ eyebrow, titre, chapo, children }) {
+/**
+ * Gabarit des pages de contenu rédactionnel (légal, confirmation, erreur).
+ *
+ * `actions` sert aux boutons de fin de page : ils doivent rester HORS du bloc
+ * de prose. Celui-ci applique un style à tous ses liens (`[&_a]`), un sélecteur
+ * descendant plus spécifique que les classes du bouton — un bouton placé à
+ * l'intérieur se retrouvait souligné, et illisible au survol.
+ */
+export function PageTexte({ eyebrow, titre, chapo, children, actions }) {
   return (
     <Container className="py-14 lg:py-20">
       <div className="mx-auto max-w-[46rem]">
@@ -22,6 +29,8 @@ export function PageTexte({ eyebrow, titre, chapo, children }) {
         >
           {children}
         </div>
+
+        {actions && <div className="mt-10 flex flex-col gap-3 sm:flex-row">{actions}</div>}
       </div>
     </Container>
   )
