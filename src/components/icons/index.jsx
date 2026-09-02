@@ -76,8 +76,37 @@ export const IconMedaille = (p) => (
   </svg>
 )
 
+export const IconDiamant = (p) => (
+  <svg viewBox="0 0 48 48" {...base} {...p}>
+    <path d="M13 10h22l9 11-20 21L4 21l9-11Z" />
+    <path d="M4 21h40" />
+    <path d="M13 10l4 11-3 21" />
+    <path d="M35 10l-4 11 3 21" />
+    <path d="M17 21h14" />
+  </svg>
+)
+
+/** Petit motif filet–cœur–filet, repris des maquettes. */
+export const SeparateurCoeur = ({ className = '', tonalite = 'text-taupe' }) => (
+  <span className={`flex items-center gap-3 ${tonalite} ${className}`} aria-hidden="true">
+    <span className="h-px w-8 bg-current opacity-50" />
+    <svg viewBox="0 0 24 24" className="h-3 w-3" {...base}>
+      <path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.7-7 9-7 9Z" />
+    </svg>
+    <span className="h-px w-8 bg-current opacity-50" />
+  </span>
+)
+
 export const icones = {
   mariage: IconAlliances,
   grossesse: IconGrossesse,
   naissance: IconPieds,
+}
+
+/** Pictogrammes des cartes de formules, choisis dans les données. */
+export const iconesFormule = {
+  alliances: IconAlliances,
+  appareil: IconAppareilPhoto,
+  diamant: IconDiamant,
+  coeur: IconCoeur,
 }
