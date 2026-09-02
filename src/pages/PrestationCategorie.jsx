@@ -159,7 +159,7 @@ function CarteFormule({ formule }) {
 
 function OptionVideo({ option }) {
   return (
-    <Container className="pb-16 lg:pb-24">
+    <Container className="py-12 lg:py-16">
       <div className="grid items-stretch gap-0 border border-line bg-cream lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         <img
           src={option.image}
@@ -239,7 +239,9 @@ export default function PrestationCategorie({ cle }) {
         </ul>
       </Container>
 
-      <Container className="py-12 lg:py-16">
+      {details.optionVideo && <OptionVideo option={details.optionVideo} />}
+
+      <Container className="pb-14 lg:pb-20">
         <div className="flex flex-col gap-6 border-l-2 border-taupe bg-sand px-7 py-7 lg:flex-row lg:items-center lg:gap-10 lg:px-10">
           <Info className="h-7 w-7 shrink-0 text-taupe-dark" strokeWidth={1.2} aria-hidden="true" />
           <div className="lg:flex-1">
@@ -257,8 +259,6 @@ export default function PrestationCategorie({ cle }) {
           </Bouton>
         </div>
       </Container>
-
-      {details.optionVideo && <OptionVideo option={details.optionVideo} />}
 
       <Container className="pb-16 lg:pb-20">
         <h2 className="eyebrow text-taupe-dark">Voir les autres formules</h2>
