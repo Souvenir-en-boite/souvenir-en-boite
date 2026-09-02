@@ -46,9 +46,16 @@ export default function Confidentialite() {
 
         <h2>3. Cookies et mesure d'audience</h2>
         <p>
-          Ce site ne dépose aucun cookie publicitaire ni traceur tiers. Les
-          polices de caractères sont hébergées sur le site lui-même : aucune
-          requête n'est adressée à un service externe lors de votre visite.
+          Ce site ne dépose aucun cookie publicitaire ni traceur tiers, et
+          n'utilise aucun outil de mesure d'audience. Les polices de caractères
+          sont hébergées sur le site lui-même.
+        </p>
+        <p>
+          Une seule ressource provient d'un service externe : le badge
+          « Recommandé sur Mariages.net » affiché en pied de page, chargé depuis
+          les serveurs de Mariages.net. Son affichage transmet votre adresse IP
+          à ce service. Il n'est chargé que si vous faites défiler la page
+          jusqu'au pied de page.
         </p>
 
         <h2>4. Conservation des données</h2>

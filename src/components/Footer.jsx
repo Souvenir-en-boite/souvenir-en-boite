@@ -95,15 +95,35 @@ export function Footer() {
           </ul>
 
           {/*
-            EMPLACEMENT DU LABEL MARIAGES.NET
-            Dès réception du badge, le déposer dans public/assets/ et décommenter :
+            Badge Mariages.net.
 
-            <a href="[lien fourni par Mariages.net]" target="_blank" rel="noopener noreferrer"
-               className="mt-8 inline-block">
-              <img src="/assets/label-mariages-net.png" width="120" height="120"
-                   alt="Souvenir en boîte, recommandé sur Mariages.net" loading="lazy" />
-            </a>
+            Le fournisseur livre aussi un script `wp-rated.js` appelant
+            `wpShowRatedv2()`. Il n'est PAS installé : sa seule fonction est de
+            rafraîchir l'URL du badge si la note change, et il le fait par une
+            requête XHR SYNCHRONE, qui bloque le rendu de la page — un procédé
+            déprécié. Vérifié : après son exécution, l'image est inchangée.
+
+            Si la note évolue, il suffit de changer le nombre dans le nom du
+            fichier (`badge-rated-10.png`).
           */}
+          <a
+            href="https://www.mariages.net/photo-mariage/souvenir-en-boite--e157250"
+            target="_blank"
+            rel="nofollow noopener"
+            title="Recommandé sur Mariages.net"
+            className="mt-8 inline-block transition-opacity hover:opacity-85"
+          >
+            <img
+              src="https://cdn1.mariages.net/assets/img/badges/rated/badge-rated-10.png"
+              alt="Souvenir en boîte, recommandé sur Mariages.net — 5 étoiles sur 10 avis"
+              width="250"
+              height="250"
+              loading="lazy"
+              decoding="async"
+              className="h-28 w-28"
+            />
+            <span className="sr-only">(nouvelle fenêtre)</span>
+          </a>
         </div>
       </Container>
 
