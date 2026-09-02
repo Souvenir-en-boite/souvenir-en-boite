@@ -8,31 +8,34 @@ import { univers, heroAccueil } from '../data/site'
 
 function Hero() {
   return (
-    <section className="relative isolate flex min-h-[32rem] items-end overflow-hidden sm:min-h-[34rem] lg:min-h-[25rem] lg:items-center">
-      {/* Point d'ancrage décalé sur mobile : le cadrage vertical recentre le
-          couple, qui se trouve à droite du milieu de la photo. */}
+    <section className="relative isolate flex min-h-[32rem] items-end overflow-hidden bg-[#0e0c0b] sm:min-h-[34rem] lg:min-h-[25rem] lg:items-center">
+      {/*
+        Sur grand écran, la photo est calée à droite à sa largeur naturelle :
+        elle s'affiche entière, sans rognage, et le couple se retrouve nettement
+        à droite. Le vide à gauche est le noir de la section, dans lequel le bord
+        de la photo se dissout par un masque — porté par l'image, il suit donc
+        son bord réel quelle que soit la largeur de l'écran.
+
+        Sur mobile elle repasse en `cover` : à sa largeur naturelle, elle
+        laisserait de larges bandes vides sur un écran étroit.
+      */}
       <img
         src={heroAccueil.src}
         alt={heroAccueil.alt}
         width={heroAccueil.width}
         height={heroAccueil.height}
         fetchpriority="high"
-        style={{
-          '--cadrage': heroAccueil.cadrage,
-          '--cadrage-bureau': heroAccueil.cadrageBureau,
-        }}
-        className="absolute inset-0 -z-10 h-full w-full object-cover [object-position:var(--cadrage)] lg:[object-position:var(--cadrage-bureau)]"
+        style={{ '--cadrage': heroAccueil.cadrage }}
+        className="fondu-vers-la-gauche absolute inset-y-0 right-0 -z-10 h-full w-full object-cover [object-position:var(--cadrage)] lg:w-auto lg:max-w-none"
       />
 
-      {/* Voile sombre : garantit la lisibilité du texte clair quelle que soit
-          la photo placée derrière. */}
       <div
-        className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(34,32,29,.92)_0%,rgba(34,32,29,.62)_45%,rgba(34,32,29,.15)_100%)] lg:bg-[linear-gradient(90deg,rgba(34,32,29,.92)_0%,rgba(34,32,29,.64)_26%,rgba(34,32,29,.2)_54%,rgba(34,32,29,0)_76%)]"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(14,12,11,.92)_0%,rgba(14,12,11,.62)_45%,rgba(14,12,11,.15)_100%)] lg:bg-none"
         aria-hidden="true"
       />
 
       <Container className="py-12 lg:py-8">
-        <div className="max-w-xl text-cream">
+        <div className="max-w-xl text-cream lg:max-w-[29rem]">
           <p className="eyebrow text-cream/85">Photographe professionnelle</p>
           <h1 className="mt-4 font-display text-5xl leading-[1.03] sm:text-6xl">
             Vos souvenirs.

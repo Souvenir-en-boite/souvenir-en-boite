@@ -91,12 +91,11 @@ export const heroContact = {
 // `objectPosition` recentre le couple.
 export const heroAccueil = {
   src: '/assets/picture/accueil/hero-mariage.avif',
-  width: 1920,
-  height: 1129,
-  // Le bandeau ne montre qu'un quart de la hauteur de la photo : on privilégie
-  // les visages, quitte à couper la traîne. `58%` en horizontal recentre le
-  // couple, qui se trouve à droite du milieu.
+  width: 1700,
+  height: 806,
+  // Sur mobile la photo couvre toute la largeur : `58%` recentre le couple,
+  // `20%` remonte sur les visages. Sur grand écran elle s'affiche entière à
+  // droite, donc aucun cadrage n'est nécessaire.
   cadrage: '58% 20%',
-  cadrageBureau: 'center 20%',
   alt: "Couple de mariés s'embrassant dans un parc au coucher du soleil, la traîne de la robe déployée dans l'herbe",
 }

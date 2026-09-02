@@ -25,7 +25,10 @@ const variantes = {
  * lecteurs d'écran ont besoin du bon élément.
  */
 export function Bouton({ to, href, variante = 'plein', className = '', children, ...rest }) {
-  const classes = `inline-flex items-center justify-center gap-2 px-7 py-3.5 eyebrow transition-colors duration-300 ${variantes[variante]} ${className}`
+  // `whitespace-nowrap` : un libellé de bouton coupé en deux lignes déforme le
+  // bouton et se lit mal. S'il ne tient pas, c'est le conteneur qu'il faut
+  // élargir, pas le texte qu'il faut casser.
+  const classes = `inline-flex items-center justify-center gap-2 whitespace-nowrap px-7 py-3.5 eyebrow transition-colors duration-300 ${variantes[variante]} ${className}`
 
   if (to) return <Link to={to} className={classes} {...rest}>{children}</Link>
   if (href) return <a href={href} className={classes} {...rest}>{children}</a>
