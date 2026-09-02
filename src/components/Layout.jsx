@@ -16,11 +16,19 @@ export default function Layout() {
       premierRendu.current = false
       return
     }
-    window.scrollTo(0, 0)
+    // `instant` est indispensable : la feuille de style met `scroll-behavior:
+    // smooth`, donc un scrollTo classique lance une ANIMATION, que le focus
+    // posé juste après annule — la page restait alors à sa position d'origine.
+    // Un défilement animé à chaque changement de page serait de toute façon
+    // désagréable ; on veut un saut net.
+    window.scrollTo({ top: 0, behavior: 'instant' })
+
     // Replace le focus en haut du contenu : sans ça, après un clic sur un lien,
     // un lecteur d'écran reste positionné sur l'ancien élément et l'utilisateur
     // ne sait pas que la page a changé.
-    mainRef.current?.focus()
+    // `preventScroll` : le focus ne doit pas déplacer la page, on vient de la
+    // remettre en haut.
+    mainRef.current?.focus({ preventScroll: true })
   }, [pathname])
 
   return (
