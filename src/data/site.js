@@ -76,10 +76,10 @@ export const navigation = [
 // Bandeau de la page contact.
 export const heroContact = {
   src: '/assets/picture/contact/hero-contact.avif',
-  width: 1600,
-  height: 800,
-  // Recadré en 2:1, le rapport de la case qui l'accueille dans le bandeau :
-  // la photo s'affiche donc quasiment entière, sans rognage supplémentaire.
+  width: 1700,
+  height: 654,
+  // Recadré en 2,6:1, proche du rapport du bandeau où elle s'affiche en pleine
+  // largeur : limite le rognage vertical.
   alt: "Détails de mariage disposés à plat sur un parquet gris : bouquet de fleurs blanches, gazette des mariés, escarpins vert émeraude, gypsophile et boîte à alliances",
 }
 

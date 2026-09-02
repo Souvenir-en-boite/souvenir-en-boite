@@ -57,32 +57,31 @@ export default function Contact() {
       />
 
       {/*
-        Bandeau d'ouverture.
+        Bandeau d'ouverture : bande large et courte, à la hauteur des bandeaux
+        des autres pages.
 
-        La photo n'occupe que la droite du bandeau, pas toute sa largeur : à
-        cette taille son format (2,4:1) correspond presque exactement à la case
-        qui l'accueille, donc elle s'affiche quasiment entière. Étalée sur toute
-        la largeur, elle était forcément rognée des deux tiers en hauteur et on
-        n'en voyait qu'une tranche.
+        La photo couvre toute la largeur et le noir se fond dedans par un
+        dégradé progressif. Une photo cantonnée à droite créait une coupure
+        nette, sans transition — ce n'est pas ce que fait la maquette.
 
-        Le fond de section est noir plein ; un court dégradé adoucit la couture
-        avec le bord gauche de la photo.
+        Le fichier est recadré en 2,6:1, proche du rapport du bandeau, pour
+        limiter le rognage vertical. `object-position` pousse le cadrage vers
+        la droite : la gauche disparaît sous le noir de toute façon.
       */}
-      <section className="relative isolate flex min-h-[20rem] items-end overflow-hidden bg-[#0e0c0b] lg:min-h-[32rem] lg:items-center">
+      <section className="relative isolate flex min-h-[20rem] items-end overflow-hidden bg-[#0e0c0b] lg:min-h-[25rem] lg:items-center">
         <img
           src={heroContact.src}
           alt={heroContact.alt}
           width={heroContact.width}
           height={heroContact.height}
           fetchpriority="high"
-          className="absolute inset-y-0 right-0 -z-10 h-full w-full object-cover lg:w-[68%]"
+          className="absolute inset-0 -z-10 h-full w-full object-cover object-center lg:object-right"
         />
         <div
-          className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(14,12,11,.96)_0%,rgba(14,12,11,.93)_52%,rgba(14,12,11,.66)_78%,rgba(14,12,11,.38)_100%)] lg:bg-[linear-gradient(90deg,#0e0c0b_0%,#0e0c0b_29%,rgba(14,12,11,.82)_36%,rgba(14,12,11,0)_48%)]"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(14,12,11,.96)_0%,rgba(14,12,11,.92)_50%,rgba(14,12,11,.62)_78%,rgba(14,12,11,.35)_100%)] lg:bg-[linear-gradient(90deg,#0e0c0b_0%,rgba(14,12,11,.96)_16%,rgba(14,12,11,.78)_28%,rgba(14,12,11,.4)_38%,rgba(14,12,11,.12)_46%,rgba(14,12,11,0)_54%)]"
           aria-hidden="true"
         />
-        <Container className="py-12 lg:py-16">
-          {/* Contenu maintenu dans la zone noire pour rester lisible. */}
+        <Container className="py-12 lg:py-14">
           <div className="lg:max-w-[26rem]">
             <p className="eyebrow text-cream/85">Parlons de vos souvenirs</p>
             <h1 className="mt-4 font-display text-4xl text-cream sm:text-5xl">
