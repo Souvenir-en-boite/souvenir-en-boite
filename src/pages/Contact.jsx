@@ -67,7 +67,10 @@ export default function Contact() {
           className="absolute inset-0 -z-10 h-full w-full object-cover"
         />
         <div
-          className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(34,32,29,.92)_0%,rgba(34,32,29,.6)_60%,rgba(34,32,29,.3)_100%)] lg:bg-[linear-gradient(90deg,rgba(34,32,29,.92)_0%,rgba(34,32,29,.66)_30%,rgba(34,32,29,.25)_60%,rgba(34,32,29,.1)_80%)]"
+          // Panneau noir franc sur le tiers gauche, puis plus rien : la photo
+          // garde sa lumière à droite. Un dégradé étalé sur toute la largeur
+          // ternissait l'image entière sans jamais donner un vrai noir.
+          className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(14,12,11,.96)_0%,rgba(14,12,11,.82)_38%,rgba(14,12,11,.25)_70%,rgba(14,12,11,0)_100%)] lg:bg-[linear-gradient(90deg,rgba(14,12,11,.97)_0%,rgba(14,12,11,.94)_24%,rgba(14,12,11,.5)_40%,rgba(14,12,11,0)_56%)]"
           aria-hidden="true"
         />
         <Container className="py-12 lg:py-16">
