@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export function Container({ children, className = '', ...rest }) {
   return (
-    <div className={`mx-auto w-full max-w-[1280px] px-5 sm:px-8 lg:px-12 ${className}`} {...rest}>
+    <div className={`mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-10 ${className}`} {...rest}>
       {children}
     </div>
   )

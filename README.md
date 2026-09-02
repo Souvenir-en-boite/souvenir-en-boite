@@ -39,19 +39,35 @@ externe à attendre au chargement.
 | Avis clients | `src/data/avis.js` |
 | Couleurs et typographies | `src/styles/index.css` (bloc `@theme`) |
 
+### Convertir des photos
+
+**Ne jamais utiliser `sips -s format avif`.** Il produit des AVIF découpés en
+grille de tuiles que Chrome ne décode pas toujours : l'image s'affiche vide,
+sans aucune erreur, avec des dimensions correctes. Le script de vérification
+refuse désormais ces fichiers.
+
+Pour convertir les photos livrées par la cliente :
+
+```bash
+node scripts/convertir-photos.mjs ~/Downloads/pixieset \
+  --sortie public/assets/picture/portfolio-mariage --largeur 1600
+```
+
+Options : `--largeur` (défaut 1600) et `--qualite` (défaut 58). Le script
+applique l'orientation EXIF, redimensionne sans jamais agrandir, et affiche
+les dimensions finales de chaque fichier — celles à reporter dans les données.
+Ajouter `--donnees` pour obtenir directement les lignes à coller.
+
+Repères utilisés sur l'accueil : 1920 px / qualité 55 pour l'image d'ouverture,
+1000 px / qualité 60 pour les cartes.
+
 ### Ajouter des photos à une galerie
 
 `src/data/galeries.js` attend pour chaque photo ses dimensions réelles en
-pixels. Elles servent à réserver la place de l'image avant son chargement
-(pas de saut de mise en page) et à décider de son format d'affichage : une
-photo **horizontale** occupe deux colonnes de la mosaïque, une verticale une
-seule.
-
-Pour retrouver les dimensions d'un fichier sur macOS :
-
-```bash
-sips -g pixelWidth -g pixelHeight public/assets/picture/portfolio-mariage/ma-photo.avif
-```
+pixels — celles affichées par le script de conversion. Elles servent à réserver
+la place de l'image avant son chargement (pas de saut de mise en page) et à
+décider de son format d'affichage : une photo **horizontale** occupe deux
+colonnes de la mosaïque, une verticale une seule.
 
 ### Activer les avis clients
 

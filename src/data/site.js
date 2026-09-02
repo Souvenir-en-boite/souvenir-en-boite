@@ -33,42 +33,40 @@ export const univers = [
     cle: 'mariage',
     titre: 'Mariage',
     accroche: 'Des instants uniques,\ndes émotions éternelles.',
-    couverture: '/assets/picture/portfolio-mariage.avif',
+    couverture: '/assets/picture/accueil/univers-mariage.avif',
+    largeur: 1000,
+    hauteur: 1500,
     couvertureAlt:
-      "Couple de mariés enlacé dans un parc au coucher du soleil, la traîne de la robe déployée dans l'herbe",
+      'Mariée en robe brodée et voile de perles, assise dans une voiture de collection blanche devant un château',
   },
   {
     cle: 'grossesse',
     titre: 'Grossesse',
     accroche: 'Un moment unique,\nà jamais gravé.',
-    couverture: '/assets/picture/portfolio-grossesse.avif',
+    couverture: '/assets/picture/accueil/univers-grossesse.avif',
+    largeur: 974,
+    hauteur: 1290,
     couvertureAlt:
-      "Future maman drapée d'un voile blanc en studio, éclairage clair-obscur sur fond noir",
+      'Future maman en robe de dentelle crème, posant de profil devant un décor floral en studio',
   },
   {
     cle: 'naissance',
     titre: 'Naissance',
     accroche: 'Les premiers instants,\nles plus précieux.',
-    couverture: '/assets/picture/portfolio-naissance.avif',
+    couverture: '/assets/picture/accueil/univers-naissance.avif',
+    largeur: 1000,
+    hauteur: 667,
     couvertureAlt:
-      'Nouveau-né endormi en pyjama et bonnet blancs tricotés, allongé dans un hamac de voile blanc',
+      'Nouveau-né endormi sur le ventre, les mains sous le menton, portant un bandeau de perles et une brassière en dentelle',
   },
 ]
 
-// Image d'ouverture de l'accueil. Deux fichiers pour deux cadrages :
-// le portrait sur mobile, le paysage sur grand écran — cela évite
-// d'étirer une image de 970 px sur toute la largeur d'un écran de bureau.
-// À remplacer par les fichiers pleine résolution de la galerie Pixieset.
+// Image d'ouverture de l'accueil. Une seule photo pour les deux cadrages :
+// elle est assez large pour supporter un recadrage vertical sur mobile, où
+// `objectPosition` recentre le couple.
 export const heroAccueil = {
-  mobile: {
-    src: '/assets/picture/portfolio-mariage.avif',
-    width: 970,
-    height: 1174,
-  },
-  bureau: {
-    src: '/assets/picture/portfolio-mariage/portfolio-mariage-20.avif',
-    width: 974,
-    height: 650,
-  },
-  alt: "Mariée lançant son bouquet dans un jardin, à contre-jour d'un soleil couchant",
+  src: '/assets/picture/accueil/hero-mariage.avif',
+  width: 1920,
+  height: 1129,
+  alt: "Couple de mariés s'embrassant dans un parc au coucher du soleil, la traîne de la robe déployée dans l'herbe",
 }

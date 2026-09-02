@@ -57,5 +57,33 @@ for (const f of html.sort()) {
   }
 }
 
-console.log('\n' + html.length + ' fichiers HTML — ' + (echecs === 0 ? 'aucun problème détecté ✓' : echecs + ' problème(s)'))
+// --- Contrôle des AVIF ---------------------------------------------------
+// `sips -s format avif` produit des AVIF découpés en grille de tuiles que
+// Chrome ne décode pas toujours : l'image apparaît alors vide, sans erreur,
+// avec des dimensions correctes et `complete === true`. Impossible à repérer
+// à la lecture du code. On refuse donc tout AVIF en grille.
+// Pour convertir des photos : node scripts/convertir-photos.mjs
+const avif = []
+;(function walk(d) {
+  for (const e of readdirSync(d)) {
+    const p = join(d, e)
+    if (statSync(p).isDirectory()) walk(p)
+    else if (e.endsWith('.avif')) avif.push(p)
+  }
+})('public/assets')
+
+let grilles = 0
+for (const f of avif) {
+  const entete = readFileSync(f).subarray(0, 4096)
+  if (entete.includes(Buffer.from('grid'))) {
+    console.log('  ✗ ' + f + ' — AVIF en grille de tuiles : risque d\'image vide dans Chrome')
+    grilles++
+    echecs++
+  }
+}
+
+console.log(
+  '\n' + html.length + ' fichiers HTML, ' + avif.length + ' images AVIF — ' +
+  (echecs === 0 ? 'aucun problème détecté ✓' : echecs + ' problème(s)')
+)
 process.exit(echecs === 0 ? 0 : 1)
