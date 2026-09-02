@@ -39,6 +39,9 @@ export const univers = [
     couverture: '/assets/picture/accueil/univers-grossesse.avif',
     largeur: 974,
     hauteur: 1290,
+    // Photo très verticale dans une carte presque carrée : sans remonter le
+    // cadrage, le visage sort du champ.
+    cadrage: 'center 18%',
     couvertureAlt:
       'Future maman en robe de dentelle crème, posant de profil devant un décor floral en studio',
   },
@@ -90,5 +93,10 @@ export const heroAccueil = {
   src: '/assets/picture/accueil/hero-mariage.avif',
   width: 1920,
   height: 1129,
+  // Le bandeau ne montre qu'un quart de la hauteur de la photo : on privilégie
+  // les visages, quitte à couper la traîne. `58%` en horizontal recentre le
+  // couple, qui se trouve à droite du milieu.
+  cadrage: '58% 20%',
+  cadrageBureau: 'center 20%',
   alt: "Couple de mariés s'embrassant dans un parc au coucher du soleil, la traîne de la robe déployée dans l'herbe",
 }

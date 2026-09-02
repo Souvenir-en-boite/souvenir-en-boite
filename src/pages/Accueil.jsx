@@ -17,7 +17,11 @@ function Hero() {
         width={heroAccueil.width}
         height={heroAccueil.height}
         fetchpriority="high"
-        className="absolute inset-0 -z-10 h-full w-full object-cover object-[58%_center] lg:object-center"
+        style={{
+          '--cadrage': heroAccueil.cadrage,
+          '--cadrage-bureau': heroAccueil.cadrageBureau,
+        }}
+        className="absolute inset-0 -z-10 h-full w-full object-cover [object-position:var(--cadrage)] lg:[object-position:var(--cadrage-bureau)]"
       />
 
       {/* Voile sombre : garantit la lisibilité du texte clair quelle que soit
@@ -63,6 +67,7 @@ function CarteUnivers({ item }) {
         height={item.hauteur}
         loading="lazy"
         decoding="async"
+        style={{ objectPosition: item.cadrage ?? 'center' }}
         className="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
       />
       <div
