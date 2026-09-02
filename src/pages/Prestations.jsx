@@ -53,7 +53,8 @@ function CarteUnivers({ item }) {
 
   return (
     <li className="flex">
-      <div className="flex flex-1 flex-col border border-line bg-cream">
+      {/* `relative` sert d'ancrage au lien étiré du bouton ci-dessous. */}
+      <div className="relative flex flex-1 flex-col border border-line bg-cream transition-colors has-[a:hover]:border-taupe">
         <img
           src={details.hero.src}
           alt={details.hero.alt}
@@ -80,7 +81,14 @@ function CarteUnivers({ item }) {
               {prixMini}
             </span>
           </p>
-          <Bouton to={`/prestations/${item.cle}`} variante="contourSombre" className="mt-8 w-full">
+          {/* Le pseudo-élément couvre toute la carte : elle devient cliquable
+              partout, sans ajouter de second lien dans l'arbre d'accessibilité
+              ni englober l'image et le texte dans l'intitulé du lien. */}
+          <Bouton
+            to={`/prestations/${item.cle}`}
+            variante="contourSombre"
+            className="mt-8 w-full after:absolute after:inset-0 after:content-['']"
+          >
             Voir les formules
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
             <span className="sr-only"> — {details.titre}</span>
