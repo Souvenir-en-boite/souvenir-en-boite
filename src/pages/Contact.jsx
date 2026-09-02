@@ -59,18 +59,14 @@ export default function Contact() {
       {/*
         Bandeau d'ouverture.
 
-        `object-contain` sur grand écran : la photo s'affiche ENTIÈRE, calée à
-        droite. Avec `object-cover` elle était forcément rognée — c'est ce qui
-        donnait une tranche zoomée quel que soit le dégradé par-dessus.
+        Sur grand écran, l'image est calée à droite à sa largeur naturelle
+        (`w-auto` sur toute la hauteur) : elle s'affiche ENTIÈRE, sans rognage.
+        Son bord gauche se dissout dans le noir par un masque porté par l'image
+        elle-même — il suit donc son bord réel quelle que soit la largeur de
+        l'écran, là où un panneau flouté à position fixe laissait une arête.
 
-        Le noir à gauche est un panneau flouté qui déborde sur le bord gauche de
-        la photo. Le flou fait la transition à la place d'un dégradé : pas de
-        frontière visible, et la matière de la photo transparaît légèrement.
-        Il déborde en haut, en bas et à gauche pour que seul son bord droit,
-        adouci, soit visible.
-
-        Sur mobile la photo reste en `cover` : `contain` laisserait de larges
-        bandes vides sur un écran étroit.
+        Sur mobile la photo reste en `cover` : à sa largeur naturelle elle
+        laisserait de larges bandes vides sur un écran étroit.
       */}
       <section className="relative isolate flex min-h-[20rem] items-end overflow-hidden bg-[#0e0c0b] lg:min-h-[25rem] lg:items-center">
         <img
@@ -79,12 +75,7 @@ export default function Contact() {
           width={heroContact.width}
           height={heroContact.height}
           fetchpriority="high"
-          className="absolute inset-0 -z-10 h-full w-full object-cover object-center lg:object-contain lg:object-right"
-        />
-
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-24 -left-24 -top-24 right-[62%] -z-10 hidden bg-[#0e0c0b] blur-[70px] lg:block"
+          className="fondu-vers-la-gauche absolute inset-y-0 right-0 -z-10 h-full w-full object-cover object-center lg:w-auto lg:max-w-none"
         />
         <div
           aria-hidden="true"

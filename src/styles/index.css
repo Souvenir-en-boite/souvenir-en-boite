@@ -64,6 +64,32 @@
 }
 
 @layer components {
+  /*
+   * Fond le bord gauche d'une image dans le fond de section, sans arête.
+   * Le masque porte sur l'image elle-même : il suit donc son bord réel, quelle
+   * que soit la largeur de l'écran. Un panneau flouté posé à un pourcentage
+   * fixe, lui, laissait apparaître le fond plein dès que la mise en page
+   * bougeait.
+   */
+  @media (width >= 64rem) {
+    .fondu-vers-la-gauche {
+      -webkit-mask-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.25) 16%,
+        rgba(0, 0, 0, 0.75) 30%,
+        #000 42%
+      );
+      mask-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.25) 16%,
+        rgba(0, 0, 0, 0.75) 30%,
+        #000 42%
+      );
+    }
+  }
+
   /* Libellé en petites capitales espacées (« PHOTOGRAPHE PROFESSIONNELLE ») */
   .eyebrow {
     font-size: 0.6875rem;
