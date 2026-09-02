@@ -28,6 +28,94 @@ const lienClasses = ({ isActive }) =>
     isActive ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'
   }`
 
+/**
+ * Entrée de navigation, avec sous-menu optionnel.
+ *
+ * Le sous-menu s'ouvre au survol ET au focus : un menu réservé à la souris
+ * serait inatteignable au clavier. En tabulant sur le parent, le sous-menu
+ * apparaît et la tabulation suivante entre dedans. Échap referme et rend le
+ * focus au parent.
+ *
+ * Le parent reste un lien : « Portfolio » mène toujours à /portfolio.
+ */
+function EntreeNavigation({ item }) {
+  const [ouvert, setOuvert] = useState(false)
+  const conteneurRef = useRef(null)
+  const parentRef = useRef(null)
+  const fermetureRef = useRef(null)
+
+  // Petit délai avant fermeture : sans lui, un déplacement en diagonale vers
+  // le sous-menu le fait disparaître sous le curseur.
+  const programmerFermeture = () => {
+    clearTimeout(fermetureRef.current)
+    fermetureRef.current = setTimeout(() => setOuvert(false), 180)
+  }
+  const annulerFermeture = () => clearTimeout(fermetureRef.current)
+
+  useEffect(() => () => clearTimeout(fermetureRef.current), [])
+
+  if (!item.sousMenu) {
+    return (
+      <li>
+        <NavLink to={item.to} end={item.to === '/'} className={lienClasses}>
+          {item.libelle}
+        </NavLink>
+      </li>
+    )
+  }
+
+  const surTouche = (e) => {
+    if (e.key === 'Escape' && ouvert) {
+      setOuvert(false)
+      parentRef.current?.focus()
+    }
+  }
+
+  return (
+    <li
+      ref={conteneurRef}
+      className="relative"
+      onMouseEnter={() => { annulerFermeture(); setOuvert(true) }}
+      onMouseLeave={programmerFermeture}
+      onFocus={() => { annulerFermeture(); setOuvert(true) }}
+      onBlur={(e) => {
+        // Ne referme que si le focus quitte vraiment l'entrée et son sous-menu.
+        if (!conteneurRef.current?.contains(e.relatedTarget)) setOuvert(false)
+      }}
+      onKeyDown={surTouche}
+    >
+      <NavLink
+        ref={parentRef}
+        to={item.to}
+        className={lienClasses}
+        aria-expanded={ouvert}
+      >
+        {item.libelle}
+      </NavLink>
+
+      {ouvert && (
+        <ul className="absolute left-1/2 top-full z-50 mt-3 min-w-[11rem] -translate-x-1/2 border border-line bg-cream py-2 shadow-lg shadow-ink/5">
+          {item.sousMenu.map((sous) => (
+            <li key={sous.to}>
+              <NavLink
+                to={sous.to}
+                className={({ isActive }) =>
+                  `eyebrow block px-5 py-2.5 transition-colors hover:bg-sand ${
+                    isActive ? 'text-taupe-dark' : 'text-ink-soft hover:text-ink'
+                  }`
+                }
+              >
+                {sous.libelle}
+                <span className="sr-only"> — {item.libelle}</span>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      )}
+    </li>
+  )
+}
+
 export function Header() {
   const [ouvert, setOuvert] = useState(false)
   const panneauRef = useRef(null)
@@ -85,11 +173,7 @@ export function Header() {
         <nav aria-label="Navigation principale" className="hidden lg:block">
           <ul className="flex items-center gap-8">
             {navigation.map((item) => (
-              <li key={item.to}>
-                <NavLink to={item.to} end={item.to === '/'} className={lienClasses}>
-                  {item.libelle}
-                </NavLink>
-              </li>
+              <EntreeNavigation key={item.to} item={item} />
             ))}
           </ul>
         </nav>
@@ -152,6 +236,26 @@ export function Header() {
                   >
                     {item.libelle}
                   </NavLink>
+
+                  {/* Sous-liens toujours dépliés : sur mobile, un accordéon
+                      ajouterait un geste pour rien, la place ne manque pas. */}
+                  {item.sousMenu && (
+                    <ul className="mt-4 flex flex-col gap-3 border-l border-line pl-5">
+                      {item.sousMenu.map((sous) => (
+                        <li key={sous.to}>
+                          <NavLink
+                            to={sous.to}
+                            className={({ isActive }) =>
+                              `eyebrow ${isActive ? 'text-taupe-dark' : 'text-ink-soft'}`
+                            }
+                          >
+                            {sous.libelle}
+                            <span className="sr-only"> — {item.libelle}</span>
+                          </NavLink>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
             </ul>

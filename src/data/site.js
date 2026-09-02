@@ -19,13 +19,6 @@ export const site = {
   },
 }
 
-export const navigation = [
-  { to: '/', libelle: 'Accueil' },
-  { to: '/portfolio', libelle: 'Portfolio' },
-  { to: '/prestations', libelle: 'Prestations' },
-  { to: '/a-propos', libelle: 'À propos' },
-  { to: '/contact', libelle: 'Contact' },
-]
 
 // Les trois univers, utilisés par l'accueil, le portfolio et les prestations.
 export const univers = [
@@ -59,6 +52,25 @@ export const univers = [
     couvertureAlt:
       'Nouveau-né endormi sur le ventre, les mains sous le menton, portant un bandeau de perles et une brassière en dentelle',
   },
+]
+
+// Les entrées avec `sousMenu` ouvrent un raccourci vers les trois univers.
+// Le parent reste un lien à part entière : le sous-menu complète, il ne
+// remplace pas.
+export const navigation = [
+  { to: '/', libelle: 'Accueil' },
+  {
+    to: '/portfolio',
+    libelle: 'Portfolio',
+    sousMenu: univers.map((u) => ({ to: `/portfolio/${u.cle}`, libelle: u.titre })),
+  },
+  {
+    to: '/prestations',
+    libelle: 'Prestations',
+    sousMenu: univers.map((u) => ({ to: `/prestations/${u.cle}`, libelle: u.titre })),
+  },
+  { to: '/a-propos', libelle: 'À propos' },
+  { to: '/contact', libelle: 'Contact' },
 ]
 
 // Image d'ouverture de l'accueil. Une seule photo pour les deux cadrages :
