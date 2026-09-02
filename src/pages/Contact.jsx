@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Instagram, Facebook, Phone, MapPin, Clock, Heart, ArrowRight } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { Container, Eyebrow } from '../components/ui'
-import { site } from '../data/site'
+import { site, heroContact } from '../data/site'
 
 const champClasses =
   'w-full border border-line bg-cream px-4 py-3.5 text-ink outline-none transition-colors placeholder:text-ink-soft/60 hover:border-taupe focus:border-taupe-dark'
@@ -59,10 +59,10 @@ export default function Contact() {
       {/* Bandeau d'ouverture */}
       <section className="relative isolate flex min-h-[18rem] items-end overflow-hidden lg:min-h-[24rem] lg:items-center">
         <img
-          src="/assets/picture/portfolio-mariage/portfolio-mariage-37.avif"
-          alt="Mariés complices sous le voile de la mariée, photographie en noir et blanc"
-          width="974"
-          height="664"
+          src={heroContact.src}
+          alt={heroContact.alt}
+          width={heroContact.width}
+          height={heroContact.height}
           fetchpriority="high"
           className="absolute inset-0 -z-10 h-full w-full object-cover"
         />

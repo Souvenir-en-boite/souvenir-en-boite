@@ -73,6 +73,16 @@ export const navigation = [
   { to: '/contact', libelle: 'Contact' },
 ]
 
+// Bandeau de la page contact.
+export const heroContact = {
+  src: '/assets/picture/contact/hero-contact.avif',
+  width: 1600,
+  height: 668,
+  // Le fichier est déjà recadré sur la bonne bande horizontale (ratio 2,4:1),
+  // le cadrage centré par défaut convient.
+  alt: "Détails de mariage disposés à plat sur un parquet gris : bouquet de fleurs blanches, gazette des mariés, escarpins vert émeraude, gypsophile et boîte à alliances",
+}
+
 // Image d'ouverture de l'accueil. Une seule photo pour les deux cadrages :
 // elle est assez large pour supporter un recadrage vertical sur mobile, où
 // `objectPosition` recentre le couple.
