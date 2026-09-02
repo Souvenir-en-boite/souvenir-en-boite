@@ -3,40 +3,39 @@ import { ArrowRight } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { Container, Bouton } from '../components/ui'
 import { icones, SeparateurCoeur } from '../components/icons'
-import { univers } from '../data/site'
+import { univers, heroPrestations } from '../data/site'
 import { prestations } from '../data/prestations'
 
 function Hero() {
   return (
-    <section className="relative isolate overflow-hidden pt-12 pb-14 lg:pt-16 lg:pb-20">
-      {/* Triptyque : la page couvre les trois univers, une seule photo en
-          donnerait une image faussée. Une seule vignette sur mobile, où trois
-          bandes étroites seraient illisibles. */}
-      <div className="absolute inset-0 -z-10 grid grid-cols-1 sm:grid-cols-3" aria-hidden="true">
-        {univers.map((item) => (
-          <img
-            key={item.cle}
-            src={item.couverture}
-            alt=""
-            width={item.largeur}
-            height={item.hauteur}
-            className={`h-full w-full object-cover ${item.cle !== 'mariage' ? 'hidden sm:block' : ''}`}
-          />
-        ))}
-      </div>
+    <section className="relative isolate flex min-h-[20rem] items-end overflow-hidden bg-[#0e0c0b] lg:min-h-[25rem] lg:items-center">
+      {/*
+        Même traitement que l'accueil et la page contact : sur grand écran la
+        photo s'affiche entière, calée à droite, et son bord gauche se dissout
+        dans le noir par le masque. Sur mobile elle repasse en `cover`.
+      */}
+      <img
+        src={heroPrestations.src}
+        alt={heroPrestations.alt}
+        width={heroPrestations.width}
+        height={heroPrestations.height}
+        fetchpriority="high"
+        style={{ '--cadrage': heroPrestations.cadrage }}
+        className="fondu-vers-la-gauche absolute inset-y-0 right-0 -z-10 h-full w-full object-cover [object-position:var(--cadrage)] lg:w-auto lg:max-w-none"
+      />
       <div
-        className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(34,32,29,.9)_0%,rgba(34,32,29,.7)_50%,rgba(34,32,29,.5)_100%)] lg:bg-[linear-gradient(90deg,rgba(34,32,29,.92)_0%,rgba(34,32,29,.72)_38%,rgba(34,32,29,.45)_70%,rgba(34,32,29,.35)_100%)]"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(14,12,11,.94)_0%,rgba(14,12,11,.7)_48%,rgba(14,12,11,.2)_100%)] lg:bg-none"
         aria-hidden="true"
       />
 
       <Container>
-        <div className="max-w-2xl text-cream">
+        <div className="max-w-2xl text-cream lg:max-w-[29rem]">
           <p className="eyebrow text-cream/85">Prestations</p>
           <SeparateurCoeur className="mt-4" tonalite="text-cream/70" />
           <h1 className="mt-6 font-display text-4xl leading-[1.12] sm:text-5xl">
             Des formules pensées pour chaque histoire.
           </h1>
-          <p className="mt-6 max-w-lg text-sm leading-relaxed text-cream/90">
+          <p className="mt-6 text-sm leading-relaxed text-cream/90">
             Trois univers, trois façons d'accompagner vos moments les plus
             précieux. Chaque formule reste personnalisable selon vos envies.
           </p>

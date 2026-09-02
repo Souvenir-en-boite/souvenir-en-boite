@@ -76,6 +76,16 @@ export const navigation = [
   { to: '/contact', libelle: 'Contact' },
 ]
 
+// Bandeau de la page prestations.
+export const heroPrestations = {
+  src: '/assets/picture/prestations/hero-prestations.avif',
+  width: 976,
+  height: 528,
+  // Sur mobile la photo couvre toute la largeur : on remonte sur les visages.
+  cadrage: 'center 30%',
+  alt: "Couple de mariés assis côte à côte sur un canapé de velours vert, elle en robe brodée, lui en costume beige et nœud papillon",
+}
+
 // Bandeau de la page contact.
 export const heroContact = {
   src: '/assets/picture/contact/hero-contact.avif',
