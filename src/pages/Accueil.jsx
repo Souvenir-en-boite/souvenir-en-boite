@@ -80,7 +80,9 @@ function CarteUnivers({ item }) {
         </p>
         <Link
           to={`/portfolio/${item.cle}`}
-          className="eyebrow mt-6 inline-flex w-fit items-center gap-3 border-b border-cream/50 pb-1 transition-colors hover:border-cream"
+          // Pseudo-élément étiré sur toute la carte : elle devient cliquable
+          // partout, sans second lien dans l'arbre d'accessibilité.
+          className="eyebrow mt-6 inline-flex w-fit items-center gap-3 border-b border-cream/50 pb-1 transition-colors hover:border-cream after:absolute after:inset-0 after:content-['']"
         >
           Voir la galerie
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />

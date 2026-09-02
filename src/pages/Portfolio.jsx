@@ -29,12 +29,12 @@ export default function Portfolio() {
           const inverse = i % 2 === 1
           return (
             <Container key={item.cle}>
-              <article className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
+              <article className="group relative grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
                 <img
                   src={item.couverture}
                   alt={item.couvertureAlt}
-                  width="970"
-                  height="1174"
+                  width={item.largeur}
+                  height={item.hauteur}
                   loading={i === 0 ? 'eager' : 'lazy'}
                   decoding="async"
                   className={`aspect-[4/5] w-full object-cover ${inverse ? 'lg:order-2' : ''}`}
@@ -50,7 +50,8 @@ export default function Portfolio() {
                   </p>
                   <Link
                     to={`/portfolio/${item.cle}`}
-                    className="eyebrow mt-8 inline-flex items-center gap-3 border-b border-ink/30 pb-1 text-ink transition-colors hover:border-ink"
+                    // Étiré sur tout le bloc, image comprise.
+                    className="eyebrow mt-8 inline-flex items-center gap-3 border-b border-ink/30 pb-1 text-ink transition-colors hover:border-ink after:absolute after:inset-0 after:content-['']"
                   >
                     Voir la galerie
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />

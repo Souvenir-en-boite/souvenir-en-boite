@@ -3,6 +3,7 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { JSDOM } from 'jsdom'
+import sharp from 'sharp'
 
 const html = []
 ;(function walk(d) {
@@ -14,6 +15,7 @@ const html = []
 })('dist')
 
 let echecs = 0
+const aVerifier = []
 const ko = (f, m) => { console.log('  ✗ ' + f.replace('dist', '') + ' — ' + m); echecs++ }
 const ignorer = (f) =>
   f.includes('/tarifs/') || f.includes('politque') || f === 'dist/404.html'
@@ -33,9 +35,19 @@ for (const f of html.sort()) {
   if (texte.length < 400) ko(f, 'contenu pré-rendu trop court (' + texte.length + ' caractères)')
 
   for (const img of doc.querySelectorAll('img')) {
-    const src = (img.getAttribute('src') || '').split('/').pop()
+    const chemin = img.getAttribute('src') || ''
+    const src = chemin.split('/').pop()
     if (img.getAttribute('alt') === null) ko(f, 'img sans alt : ' + src)
-    if (!img.getAttribute('width') || !img.getAttribute('height')) ko(f, 'img sans width/height : ' + src)
+    const l = img.getAttribute('width')
+    const h = img.getAttribute('height')
+    if (!l || !h) {
+      ko(f, 'img sans width/height : ' + src)
+    } else if (chemin.startsWith('/assets')) {
+      // Des dimensions inexactes réservent la mauvaise place avant chargement :
+      // la page saute au moment où l'image arrive. La présence des attributs ne
+      // suffit pas, encore faut-il qu'ils correspondent au fichier.
+      aVerifier.push({ f, src, chemin, l: +l, h: +h })
+    }
   }
 
   for (const s of doc.querySelectorAll('script[type="application/ld+json"]')) {
@@ -54,6 +66,24 @@ for (const f of html.sort()) {
     const n = +t.tagName[1]
     if (n > precedent + 1) ko(f, 'saut h' + precedent + ' -> h' + n + ' ("' + t.textContent.trim().slice(0, 32) + '")')
     precedent = n
+  }
+}
+
+// --- Dimensions déclarées contre dimensions réelles ----------------------
+const tailles = new Map()
+for (const { f, src, chemin, l, h } of aVerifier) {
+  if (!tailles.has(chemin)) {
+    try {
+      const m = await sharp('public' + chemin).metadata()
+      tailles.set(chemin, [m.width, m.height])
+    } catch {
+      tailles.set(chemin, null)
+    }
+  }
+  const reel = tailles.get(chemin)
+  if (!reel) { ko(f, 'image introuvable dans public/ : ' + src); continue }
+  if (reel[0] !== l || reel[1] !== h) {
+    ko(f, `dimensions déclarées ${l}x${h} mais fichier ${reel[0]}x${reel[1]} : ${src}`)
   }
 }
 
@@ -83,7 +113,7 @@ for (const f of avif) {
 }
 
 console.log(
-  '\n' + html.length + ' fichiers HTML, ' + avif.length + ' images AVIF — ' +
+  '\n' + html.length + ' fichiers HTML, ' + tailles.size + ' images vérifiées, ' + avif.length + ' AVIF — ' +
   (echecs === 0 ? 'aucun problème détecté ✓' : echecs + ' problème(s)')
 )
 process.exit(echecs === 0 ? 0 : 1)
