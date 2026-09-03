@@ -1,7 +1,8 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Head } from 'vite-react-ssg'
 import {
-  ArrowLeft, ArrowRight, Check, Info, Heart,
+  ArrowLeft, ArrowRight, Check, Info, Heart, ChevronDown,
   Sparkles, Church, DoorOpen, Mic, Music, Martini, Cake, Film,
 } from 'lucide-react'
 import { Seo } from '../components/Seo'
@@ -107,51 +108,114 @@ function Hero({ details }) {
   )
 }
 
-function CarteFormule({ formule }) {
+/**
+ * Carte d'une formule.
+ *
+ * Sous 1024 px, le détail est replié derrière l'en-tête : on voit les trois
+ * noms et les trois prix dans un même écran, donc on peut comparer. Déplié,
+ * chaque formule occupait plus de 600 px et la page dépassait 2 300 px.
+ *
+ * Au-dessus, rien ne change : tout est affiché, l'en-tête redevient un bloc
+ * centré et le bouton de dépliage disparaît.
+ */
+function CarteFormule({ formule, cleUnivers, ouverte, basculer }) {
   const Icone = iconesFormule[formule.icone]
   const vedette = formule.coupDeCoeur
+  // Les accents sont translittérés plutôt que supprimés : « Émotion » donnerait
+  // sinon « -motion ».
+  const idDetail = `formule-${cleUnivers}-${formule.nom
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')}`
 
   return (
     <li className={`relative flex ${vedette ? 'lg:-mt-7' : ''}`}>
       {vedette && (
-        <p className="absolute -top-4 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap bg-taupe px-5 py-2 eyebrow text-ink">
+        <p className="absolute -top-3 right-4 z-10 whitespace-nowrap bg-taupe px-4 py-1.5 eyebrow text-ink lg:left-1/2 lg:right-auto lg:-top-4 lg:-translate-x-1/2 lg:px-5 lg:py-2">
           <Heart className="mr-2 inline h-3.5 w-3.5 fill-current" aria-hidden="true" />
           Coup de cœur
         </p>
       )}
 
       <div
-        className={`flex flex-1 flex-col border bg-cream px-6 py-8 text-center sm:px-7 sm:py-10 lg:px-9 ${
+        className={`flex flex-1 flex-col border bg-cream lg:px-9 lg:py-10 lg:text-center ${
           vedette ? 'border-taupe shadow-lg shadow-ink/5' : 'border-line'
         }`}
       >
-        <Icone className="mx-auto h-10 w-10 text-taupe-dark sm:h-11 sm:w-11" />
-        <h2 className="mt-4 font-display text-2xl uppercase tracking-[0.12em] sm:mt-5">
-          {formule.nom}
-        </h2>
-        {formule.sousTitre && (
-          <p className="mt-2 text-sm text-ink-soft">{formule.sousTitre}</p>
-        )}
-        <SeparateurCoeur className="mt-4 justify-center sm:mt-5" />
-        <p className="mt-4 font-display text-4xl text-taupe-dark sm:mt-5">{formule.prix}</p>
+        {/* En-tête : ligne cliquable sur mobile, bloc centré sur grand écran */}
+        <div className="relative flex items-center gap-4 px-5 py-5 lg:flex-col lg:p-0">
+          <Icone className="h-9 w-9 shrink-0 text-taupe-dark lg:mx-auto lg:h-11 lg:w-11" />
 
-        <ul className="mt-6 flex flex-1 flex-col gap-3.5 text-left sm:mt-8 sm:gap-4">
-          {formule.inclus.map((ligne, i) => (
-            <li key={i} className="flex gap-3 text-sm leading-relaxed text-ink-soft">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-taupe-dark" aria-hidden="true" />
-              <span>{ligne}</span>
-            </li>
-          ))}
-        </ul>
+          <div className="flex-1 text-left lg:text-center">
+            <h2 className="font-display text-xl uppercase tracking-[0.12em] lg:mt-5 lg:text-2xl">
+              {formule.nom}
+            </h2>
+            {formule.sousTitre && (
+              <p className="mt-2 hidden text-sm text-ink-soft lg:block">{formule.sousTitre}</p>
+            )}
+            <SeparateurCoeur className="mt-5 hidden justify-center lg:flex" />
+            <p className="mt-0.5 font-display text-2xl text-taupe-dark lg:mt-5 lg:text-4xl">
+              {formule.prix}
+            </p>
+          </div>
 
-        <Bouton
-          to="/contact"
-          variante={vedette ? 'plein' : 'contourSombre'}
-          className="mt-7 w-full sm:mt-9"
+          {/* Le pseudo-élément étire la zone cliquable à toute la ligne, sans
+              ajouter de second élément interactif. */}
+          <button
+            type="button"
+            onClick={basculer}
+            aria-expanded={ouverte}
+            aria-controls={idDetail}
+            className="shrink-0 p-1 text-ink-soft after:absolute after:inset-0 after:content-[''] lg:hidden"
+          >
+            <ChevronDown
+              className={`h-5 w-5 transition-transform duration-300 ${ouverte ? 'rotate-180' : ''}`}
+              aria-hidden="true"
+            />
+            <span className="sr-only">
+              Voir le détail de la formule {formule.nom}
+            </span>
+          </button>
+        </div>
+
+        {/* La grille passe de 0fr à 1fr : c'est ce qui permet d'animer une
+            hauteur automatique, qu'une transition sur `height` ne sait pas
+            faire. */}
+        <div
+          id={idDetail}
+          className={`grid transition-[grid-template-rows] duration-300 ease-out lg:flex lg:flex-1 lg:flex-col ${
+            ouverte ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+          }`}
         >
-          Choisir cette formule
-          <span className="sr-only"> — formule {formule.nom}</span>
-        </Bouton>
+          {/* `invisible` replié : sans lui, les liens du détail resteraient
+              atteignables au clavier alors qu'ils sont de hauteur nulle. */}
+          <div
+            className={`overflow-hidden transition-[visibility] duration-300 lg:flex lg:flex-1 lg:flex-col ${
+              ouverte ? 'visible' : 'invisible lg:visible'
+            }`}
+          >
+            <div className="flex flex-col px-5 pb-6 lg:flex-1 lg:p-0">
+              <ul className="flex flex-1 flex-col gap-3.5 text-left lg:mt-8 lg:gap-4">
+                {formule.inclus.map((ligne, i) => (
+                  <li key={i} className="flex gap-3 text-sm leading-relaxed text-ink-soft">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-taupe-dark" aria-hidden="true" />
+                    <span>{ligne}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <Bouton
+                to="/contact"
+                variante={vedette ? 'plein' : 'contourSombre'}
+                className="mt-6 w-full lg:mt-9"
+              >
+                Choisir cette formule
+                <span className="sr-only"> — formule {formule.nom}</span>
+              </Bouton>
+            </div>
+          </div>
+        </div>
       </div>
     </li>
   )
@@ -216,6 +280,9 @@ function OptionVideo({ option }) {
 
 export default function PrestationCategorie({ cle }) {
   const details = prestations[cle]
+  // Une seule formule dépliée à la fois : sur un écran étroit, plusieurs
+  // ouvertes annuleraient le gain de lisibilité.
+  const [deplie, setDeplie] = useState(null)
   const autres = univers.filter((u) => u.cle !== cle)
 
   return (
@@ -234,7 +301,13 @@ export default function PrestationCategorie({ cle }) {
       <Container className="relative z-10 -mt-24 sm:-mt-28 lg:-mt-36">
         <ul className="grid gap-4 sm:gap-5 lg:grid-cols-3">
           {details.formules.map((formule) => (
-            <CarteFormule key={formule.nom} formule={formule} />
+            <CarteFormule
+              key={formule.nom}
+              formule={formule}
+              cleUnivers={cle}
+              ouverte={deplie === formule.nom}
+              basculer={() => setDeplie((n) => (n === formule.nom ? null : formule.nom))}
+            />
           ))}
         </ul>
       </Container>
