@@ -66,7 +66,7 @@ function DonneesFormules({ cle, details }) {
 function Hero({ details }) {
   return (
     // La marge basse généreuse laisse les cartes remonter sur la photo.
-    <section className="relative isolate overflow-hidden pt-12 pb-36 lg:pt-16 lg:pb-48">
+    <section className="relative isolate overflow-hidden pt-10 pb-32 sm:pt-12 sm:pb-36 lg:pt-16 lg:pb-48">
       <img
         src={details.hero.src}
         alt={details.hero.alt}
@@ -121,21 +121,21 @@ function CarteFormule({ formule }) {
       )}
 
       <div
-        className={`flex flex-1 flex-col border bg-cream px-7 py-10 text-center lg:px-9 ${
+        className={`flex flex-1 flex-col border bg-cream px-6 py-8 text-center sm:px-7 sm:py-10 lg:px-9 ${
           vedette ? 'border-taupe shadow-lg shadow-ink/5' : 'border-line'
         }`}
       >
-        <Icone className="mx-auto h-11 w-11 text-taupe-dark" />
-        <h2 className="mt-5 font-display text-2xl uppercase tracking-[0.12em]">
+        <Icone className="mx-auto h-10 w-10 text-taupe-dark sm:h-11 sm:w-11" />
+        <h2 className="mt-4 font-display text-2xl uppercase tracking-[0.12em] sm:mt-5">
           {formule.nom}
         </h2>
         {formule.sousTitre && (
           <p className="mt-2 text-sm text-ink-soft">{formule.sousTitre}</p>
         )}
-        <SeparateurCoeur className="mt-5 justify-center" />
-        <p className="mt-5 font-display text-4xl text-taupe-dark">{formule.prix}</p>
+        <SeparateurCoeur className="mt-4 justify-center sm:mt-5" />
+        <p className="mt-4 font-display text-4xl text-taupe-dark sm:mt-5">{formule.prix}</p>
 
-        <ul className="mt-8 flex flex-1 flex-col gap-4 text-left">
+        <ul className="mt-6 flex flex-1 flex-col gap-3.5 text-left sm:mt-8 sm:gap-4">
           {formule.inclus.map((ligne, i) => (
             <li key={i} className="flex gap-3 text-sm leading-relaxed text-ink-soft">
               <Check className="mt-0.5 h-4 w-4 shrink-0 text-taupe-dark" aria-hidden="true" />
@@ -147,7 +147,7 @@ function CarteFormule({ formule }) {
         <Bouton
           to="/contact"
           variante={vedette ? 'plein' : 'contourSombre'}
-          className="mt-9 w-full"
+          className="mt-7 w-full sm:mt-9"
         >
           Choisir cette formule
           <span className="sr-only"> — formule {formule.nom}</span>
@@ -159,7 +159,7 @@ function CarteFormule({ formule }) {
 
 function OptionVideo({ option }) {
   return (
-    <Container className="py-12 lg:py-16">
+    <Container className="py-10 sm:py-12 lg:py-16">
       <div className="grid items-stretch gap-0 border border-line bg-cream lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         <img
           src={option.image}
@@ -168,10 +168,10 @@ function OptionVideo({ option }) {
           height={option.imageHauteur}
           loading="lazy"
           decoding="async"
-          className="h-full min-h-[16rem] w-full object-cover"
+          className="h-full min-h-[13rem] w-full object-cover sm:min-h-[16rem]"
         />
 
-        <div className="p-8 lg:p-12">
+        <div className="p-6 sm:p-8 lg:p-12">
           <p className="eyebrow flex items-center gap-3 text-taupe-dark">
             <IconVideo className="h-6 w-6" />
             Option vidéo
@@ -191,7 +191,7 @@ function OptionVideo({ option }) {
             </p>
           </div>
 
-          <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {option.etapes.map((etape) => {
               const Icone = iconesEtape[etape.icone]
               return (
@@ -231,8 +231,8 @@ export default function PrestationCategorie({ cle }) {
       <Hero details={details} />
 
       {/* Remonte sur la photo du bandeau, comme sur la maquette. */}
-      <Container className="relative z-10 -mt-28 lg:-mt-36">
-        <ul className="grid gap-5 lg:grid-cols-3">
+      <Container className="relative z-10 -mt-24 sm:-mt-28 lg:-mt-36">
+        <ul className="grid gap-4 sm:gap-5 lg:grid-cols-3">
           {details.formules.map((formule) => (
             <CarteFormule key={formule.nom} formule={formule} />
           ))}
@@ -242,7 +242,7 @@ export default function PrestationCategorie({ cle }) {
       {details.optionVideo && <OptionVideo option={details.optionVideo} />}
 
       <Container className="pb-14 lg:pb-20">
-        <div className="flex flex-col gap-6 border-l-2 border-taupe bg-sand px-7 py-7 lg:flex-row lg:items-center lg:gap-10 lg:px-10">
+        <div className="flex flex-col gap-5 border-l-2 border-taupe bg-sand px-6 py-6 sm:gap-6 sm:px-7 sm:py-7 lg:flex-row lg:items-center lg:gap-10 lg:px-10">
           <Info className="h-7 w-7 shrink-0 text-taupe-dark" strokeWidth={1.2} aria-hidden="true" />
           <div className="lg:flex-1">
             <h2 className="sr-only">Bon à savoir</h2>

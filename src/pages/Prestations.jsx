@@ -62,19 +62,19 @@ function CarteUnivers({ item }) {
           loading="lazy"
           decoding="async"
           style={{ objectPosition: details.hero.cadrage ?? 'center' }}
-          className="aspect-[4/3] w-full object-cover"
+          className="aspect-[3/2] w-full object-cover sm:aspect-[4/3]"
         />
 
-        <div className="flex flex-1 flex-col px-7 py-9 text-center lg:px-9">
-          <Icone className="mx-auto h-11 w-11 text-taupe-dark" />
-          <h2 className="mt-5 font-display text-2xl uppercase tracking-[0.12em]">
+        <div className="flex flex-1 flex-col px-6 py-7 text-center sm:px-7 sm:py-9 lg:px-9">
+          <Icone className="mx-auto h-10 w-10 text-taupe-dark sm:h-11 sm:w-11" />
+          <h2 className="mt-4 font-display text-2xl uppercase tracking-[0.12em] sm:mt-5">
             {details.titre}
           </h2>
-          <SeparateurCoeur className="mt-5 justify-center" />
-          <p className="mt-6 flex-1 text-sm leading-relaxed text-ink-soft">
+          <SeparateurCoeur className="mt-4 justify-center sm:mt-5" />
+          <p className="mt-5 flex-1 text-sm leading-relaxed text-ink-soft sm:mt-6">
             {details.intro}
           </p>
-          <p className="mt-7">
+          <p className="mt-6 sm:mt-7">
             <span className="eyebrow block text-ink-soft">À partir de</span>
             <span className="mt-1 block font-display text-3xl text-taupe-dark">
               {prixMini}
@@ -86,7 +86,7 @@ function CarteUnivers({ item }) {
           <Bouton
             to={`/prestations/${item.cle}`}
             variante="contourSombre"
-            className="mt-8 w-full after:absolute after:inset-0 after:content-['']"
+            className="mt-6 w-full after:absolute after:inset-0 after:content-[''] sm:mt-8"
           >
             Voir les formules
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -109,8 +109,8 @@ export default function Prestations() {
 
       <Hero />
 
-      <Container className="py-12 lg:py-16">
-        <ul className="grid gap-5 lg:grid-cols-3">
+      <Container className="py-10 sm:py-12 lg:py-16">
+        <ul className="grid gap-4 sm:gap-5 lg:grid-cols-3">
           {univers.map((item) => (
             <CarteUnivers key={item.cle} item={item} />
           ))}
