@@ -31,10 +31,27 @@ export default function MentionsLegales() {
         </ul>
 
         <h2>Hébergement</h2>
+        {/*
+          Coordonnées relevées dans les conditions d'utilisation de Vercel
+          (vercel.com/legal/terms), seule source officielle : les annuaires
+          d'entreprises en donnent plusieurs, contradictoires.
+
+          Vercel ne publie pas de numéro de téléphone de contact ; la LCEN
+          demande nom, adresse et téléphone de l'hébergeur, on indique donc
+          l'adresse du site à la place de ce dernier.
+        */}
         <ul>
-          <li><strong>Hébergeur :</strong> [NOM DE L'HÉBERGEUR À COMPLÉTER]</li>
-          <li><strong>Adresse :</strong> [ADRESSE DE L'HÉBERGEUR À COMPLÉTER]</li>
-          <li><strong>Téléphone :</strong> [TÉLÉPHONE DE L'HÉBERGEUR À COMPLÉTER]</li>
+          <li><strong>Hébergeur :</strong> Vercel Inc.</li>
+          <li>
+            <strong>Adresse :</strong> 440 N Barranca Ave #4133, Covina,
+            CA 91723, États-Unis
+          </li>
+          <li>
+            <strong>Site :</strong>{' '}
+            <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
+              vercel.com
+            </a>
+          </li>
         </ul>
 
         <h2>Propriété intellectuelle</h2>
