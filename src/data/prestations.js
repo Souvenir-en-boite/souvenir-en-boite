@@ -167,14 +167,10 @@ export const prestations = {
     heroTexte:
       'Les premiers instants de vie sont éphémères. Avec patience et tendresse, je capture les premiers regards, les petites mains et les grands câlins.',
     hero: {
-      // Provisoire : en attente de la photo choisie par la cliente.
-      src: '/assets/picture/portfolio-naissance/portfolio-naissance-20.avif',
-      width: 974,
-      height: 806,
-      // Recadre vers le haut : sur un bandeau très large, un cadrage centré
-      // coupait le visage de l'enfant.
-      cadrage: 'center 30%',
-      alt: 'Petite fille en robe de dentelle blanche, riant assise devant un décor floral en studio',
+      src: '/assets/picture/prestations/hero-prestations-naissance.avif',
+      width: 1920,
+      height: 1280,
+      alt: "Nouveau-né éveillé, allongé dans des bras qui le soutiennent, à contre-jour devant une fenêtre lumineuse",
     },
     intro:
       'Les premiers instants de vie sont éphémères mais infiniment précieux. Avec patience et tendresse, je capture les premiers regards, les petites mains, les grands câlins.',
