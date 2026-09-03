@@ -27,7 +27,7 @@ function Hero() {
         aria-hidden="true"
       />
 
-      <Container>
+      <Container className="py-10 lg:py-12">
         <div className="max-w-2xl text-cream lg:max-w-[29rem]">
           <p className="eyebrow text-cream/85">Prestations</p>
           <SeparateurCoeur className="mt-4" tonalite="text-cream/70" />
