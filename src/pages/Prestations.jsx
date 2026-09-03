@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
 import { Seo } from '../components/Seo'
-import { Container, Bouton, estUnMontant } from '../components/ui'
-import { icones, SeparateurCoeur } from '../components/icons'
+import { Container, Bouton } from '../components/ui'
+import { SeparateurCoeur } from '../components/icons'
+import { CarteUnivers } from '../components/CarteUnivers'
 import { univers, heroPrestations } from '../data/site'
 import { prestations } from '../data/prestations'
 
@@ -45,64 +44,6 @@ function Hero() {
   )
 }
 
-function CarteUnivers({ item }) {
-  const Icone = icones[item.cle]
-  const details = prestations[item.cle]
-  const prixMini = details.formules[0].prix
-
-  return (
-    <li className="flex">
-      {/* `relative` sert d'ancrage au lien étiré du bouton ci-dessous. */}
-      <div className="relative flex flex-1 flex-col border border-line bg-cream transition-colors has-[a:hover]:border-taupe">
-        <img
-          src={details.hero.src}
-          alt={details.hero.alt}
-          width={details.hero.width}
-          height={details.hero.height}
-          loading="lazy"
-          decoding="async"
-          style={{ objectPosition: details.hero.cadrage ?? 'center' }}
-          className="aspect-[3/2] w-full object-cover sm:aspect-[4/3]"
-        />
-
-        <div className="flex flex-1 flex-col px-6 py-7 text-center sm:px-7 sm:py-9 lg:px-9">
-          <Icone className="mx-auto h-10 w-10 text-taupe-dark sm:h-11 sm:w-11" />
-          <h2 className="mt-4 font-display text-2xl uppercase tracking-[0.12em] sm:mt-5">
-            {details.titre}
-          </h2>
-          <SeparateurCoeur className="mt-4 justify-center sm:mt-5" />
-          <p className="mt-5 flex-1 text-sm leading-relaxed text-ink-soft sm:mt-6">
-            {details.intro}
-          </p>
-          <p className="mt-6 sm:mt-7">
-            {estUnMontant(prixMini) && (
-              <span className="eyebrow block text-ink-soft">À partir de</span>
-            )}
-            <span
-              className={`block font-display text-3xl text-taupe-dark ${
-                estUnMontant(prixMini) ? 'mt-1' : ''
-              }`}
-            >
-              {prixMini}
-            </span>
-          </p>
-          {/* Le pseudo-élément couvre toute la carte : elle devient cliquable
-              partout, sans ajouter de second lien dans l'arbre d'accessibilité
-              ni englober l'image et le texte dans l'intitulé du lien. */}
-          <Bouton
-            to={`/prestations/${item.cle}`}
-            variante="contourSombre"
-            className="mt-6 w-full after:absolute after:inset-0 after:content-[''] sm:mt-8"
-          >
-            Voir les formules
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            <span className="sr-only"> — {details.titre}</span>
-          </Bouton>
-        </div>
-      </div>
-    </li>
-  )
-}
 
 export default function Prestations() {
   return (
@@ -118,7 +59,17 @@ export default function Prestations() {
       <Container className="py-10 sm:py-12 lg:py-16">
         <ul className="grid gap-4 sm:gap-5 lg:grid-cols-3">
           {univers.map((item) => (
-            <CarteUnivers key={item.cle} item={item} />
+            <CarteUnivers
+              key={item.cle}
+              item={item}
+              vers={`/prestations/${item.cle}`}
+              libelle="Voir les formules"
+              niveau={2}
+              prix={prestations[item.cle].formules[0].prix}
+              // Le bandeau de la page de destination : on retrouve la même
+              // photo en grand après le clic.
+              visuel={prestations[item.cle].hero}
+            />
           ))}
         </ul>
       </Container>

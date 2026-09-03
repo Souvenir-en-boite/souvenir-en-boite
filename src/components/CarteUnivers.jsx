@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { icones } from './icons'
+import { estUnMontant } from './ui'
 
 /**
  * Carte d'un univers : photo en fond, pictogramme, titre et accroche.
@@ -12,20 +13,36 @@ import { icones } from './icons'
  * section (accueil), 2 quand elle est directement sous le titre de page
  * (portfolio). Sauter un niveau désoriente la navigation au lecteur d'écran.
  */
-export function CarteUnivers({ item, vers, libelle = 'Voir la galerie', niveau = 3 }) {
+export function CarteUnivers({
+  item,
+  vers,
+  libelle = 'Voir la galerie',
+  niveau = 3,
+  prix,
+  visuel,
+}) {
   const Icone = icones[item.cle]
   const Titre = `h${niveau}`
+  // `visuel` permet à une page d'afficher sa propre photo — celle de la page de
+  // destination, par exemple — plutôt que la couverture commune.
+  const photo = visuel ?? {
+    src: item.couverture,
+    width: item.largeur,
+    height: item.hauteur,
+    alt: item.couvertureAlt,
+    cadrage: item.cadrage,
+  }
 
   return (
     <li className="group relative isolate overflow-hidden">
       <img
-        src={item.couverture}
-        alt={item.couvertureAlt}
-        width={item.largeur}
-        height={item.hauteur}
+        src={photo.src}
+        alt={photo.alt}
+        width={photo.width}
+        height={photo.height}
         loading="lazy"
         decoding="async"
-        style={{ objectPosition: item.cadrage ?? 'center' }}
+        style={{ objectPosition: photo.cadrage ?? 'center' }}
         className="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
       />
       {/*
@@ -47,6 +64,15 @@ export function CarteUnivers({ item, vers, libelle = 'Voir la galerie', niveau =
         <p className="mt-3 max-w-[16rem] whitespace-pre-line text-sm leading-relaxed text-cream/85">
           {item.accroche}
         </p>
+        {prix && (
+          <p className="mt-4">
+            {estUnMontant(prix) && (
+              <span className="eyebrow text-cream/70">À partir de </span>
+            )}
+            <span className="font-display text-2xl text-cream">{prix}</span>
+          </p>
+        )}
+
         <Link
           to={vers}
           // Pseudo-élément étiré sur toute la carte : elle devient cliquable
