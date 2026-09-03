@@ -9,7 +9,7 @@ import { univers, heroAccueil } from '../data/site'
 
 function Hero() {
   return (
-    <section className="relative isolate flex min-h-[32rem] items-end overflow-hidden bg-[#0e0c0b] sm:min-h-[34rem] lg:min-h-[25rem] lg:items-center">
+    <section className="relative isolate flex min-h-[26rem] items-end overflow-hidden bg-[#0e0c0b] sm:min-h-[28rem] lg:min-h-[25rem] lg:items-center">
       {/*
         Sur grand écran, la photo est calée à droite à sa largeur naturelle :
         elle s'affiche entière, sans rognage, et le couple se retrouve nettement
@@ -35,7 +35,7 @@ function Hero() {
         aria-hidden="true"
       />
 
-      <Container className="py-12 lg:py-8">
+      <Container className="py-10 lg:py-8">
         <div className="max-w-xl text-cream lg:max-w-[29rem]">
           <p className="eyebrow text-cream/85">Photographe professionnelle</p>
           <h1 className="mt-4 font-display text-5xl leading-[1.03] sm:text-6xl">
@@ -48,7 +48,7 @@ function Hero() {
             Des images authentiques, des émotions vraies, des souvenirs qui
             traversent le temps.
           </p>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Bouton to="/portfolio">Découvrir mon travail</Bouton>
             <Bouton to="/prestations" variante="contourClair">
               Mes prestations
