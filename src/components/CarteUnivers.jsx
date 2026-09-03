@@ -28,8 +28,14 @@ export function CarteUnivers({ item, vers, libelle = 'Voir la galerie', niveau =
         style={{ objectPosition: item.cadrage ?? 'center' }}
         className="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
       />
+      {/*
+        Sur mobile la carte est large et courte, avec le texte à gauche : un
+        dégradé vertical n'assombrit pas la zone qui en a besoin. Il part donc
+        de la gauche. Sur grand écran la carte redevient haute et le texte
+        s'appuie en bas — le dégradé y reprend son sens vertical.
+      */}
       <div
-        className="absolute inset-0 -z-10 bg-linear-to-t from-night/90 via-night/50 to-night/20"
+        className="absolute inset-0 -z-10 bg-linear-to-r from-night/92 via-night/55 to-night/15 lg:bg-linear-to-t lg:from-night/90 lg:via-night/50 lg:to-night/20"
         aria-hidden="true"
       />
 

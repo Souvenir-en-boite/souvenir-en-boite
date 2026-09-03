@@ -37,7 +37,9 @@ function Hero() {
 
       <Container className="py-10 lg:py-8">
         <div className="max-w-xl text-cream lg:max-w-[29rem]">
-          <p className="eyebrow text-cream/85">Photographe professionnelle</p>
+          <p className="eyebrow tracking-[0.16em] text-cream/85 sm:tracking-[0.22em]">
+            Photographe professionnelle
+          </p>
           <h1 className="mt-4 font-display text-5xl leading-[1.03] sm:text-6xl">
             Vos souvenirs.
             <br />
@@ -64,16 +66,21 @@ function Hero() {
 function BandeauContact() {
   return (
     <Container className="pt-2.5 pb-2.5">
-      <div className="flex flex-col items-center gap-7 bg-sand px-7 py-12 text-center lg:flex-row lg:gap-12 lg:px-14 lg:text-left">
-        <IconAppareilPhoto className="h-14 w-14 shrink-0 text-taupe-dark" />
-        <div className="lg:flex-1">
-          <h2 className="font-display text-2xl lg:text-3xl">
-            Envie de créer vos propres souvenirs ?
-          </h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-soft">
-            Chaque histoire est unique. Discutons de votre projet et créons
-            ensemble des images qui vous ressemblent.
-          </p>
+      <div className="flex flex-col gap-7 bg-sand px-6 py-10 sm:px-7 lg:flex-row lg:items-center lg:gap-12 lg:px-14">
+        {/* L'icône accompagne le texte sur une même ligne, y compris sur
+            mobile : empilée au-dessus, elle coûtait une trentaine de pixels
+            de hauteur pour rien. */}
+        <div className="flex items-start gap-5 lg:flex-1 lg:items-center">
+          <IconAppareilPhoto className="h-11 w-11 shrink-0 text-taupe-dark lg:h-14 lg:w-14" />
+          <div>
+            <h2 className="font-display text-xl uppercase tracking-wide sm:text-2xl lg:text-3xl">
+              Envie de créer vos propres souvenirs ?
+            </h2>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-soft">
+              Chaque histoire est unique. Discutons de votre projet et créons
+              ensemble des images qui vous ressemblent.
+            </p>
+          </div>
         </div>
         <Bouton to="/contact" className="shrink-0">
           Réserver une séance

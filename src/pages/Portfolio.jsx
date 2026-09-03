@@ -39,9 +39,9 @@ export default function Portfolio() {
       </Container>
 
       <Container className="pb-16 lg:pb-24">
-        <div className="flex flex-col items-center gap-7 bg-sand px-7 py-12 text-center lg:flex-row lg:gap-12 lg:px-14 lg:text-left">
+        <div className="flex flex-col gap-7 bg-sand px-6 py-10 sm:px-7 lg:flex-row lg:items-center lg:gap-12 lg:px-14">
           <div className="lg:flex-1">
-            <h2 className="font-display text-2xl lg:text-3xl">
+            <h2 className="font-display text-xl uppercase tracking-wide sm:text-2xl lg:text-3xl">
               Une de ces galeries vous parle ?
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">
