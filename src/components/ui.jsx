@@ -35,6 +35,14 @@ export function Bouton({ to, href, variante = 'plein', className = '', children,
   return <button type="button" className={classes} {...rest}>{children}</button>
 }
 
+/**
+ * « À partir de » n'a de sens que devant un montant : accolé à une mention
+ * comme « Sur devis », il donne « À partir de Sur devis ». Le libellé suit donc
+ * la présence d'un chiffre, et reviendra de lui-même le jour où un vrai prix
+ * remplacera la mention.
+ */
+export const estUnMontant = (prix) => /\d/.test(prix ?? '')
+
 export function Eyebrow({ children, className = '', as: Balise = 'p' }) {
   return <Balise className={`eyebrow text-taupe-dark ${className}`}>{children}</Balise>
 }

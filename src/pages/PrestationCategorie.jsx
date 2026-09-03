@@ -6,7 +6,7 @@ import {
   Sparkles, Church, DoorOpen, Mic, Music, Martini, Cake, Film,
 } from 'lucide-react'
 import { Seo } from '../components/Seo'
-import { Container, Bouton } from '../components/ui'
+import { Container, Bouton, estUnMontant } from '../components/ui'
 import { iconesFormule, IconVideo, SeparateurCoeur } from '../components/icons'
 import { prestations } from '../data/prestations'
 import { site, univers } from '../data/site'
@@ -248,8 +248,14 @@ function OptionVideo({ option }) {
               </p>
             </div>
             <p className="shrink-0 border border-line px-6 py-4 text-center">
-              <span className="eyebrow block text-ink-soft">À partir de</span>
-              <span className="mt-1 block font-display text-2xl text-taupe-dark">
+              {estUnMontant(option.prix) && (
+                <span className="eyebrow block text-ink-soft">À partir de</span>
+              )}
+              <span
+                className={`block font-display text-2xl text-taupe-dark ${
+                  estUnMontant(option.prix) ? 'mt-1' : ''
+                }`}
+              >
                 {option.prix}
               </span>
             </p>

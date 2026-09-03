@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { Seo } from '../components/Seo'
-import { Container, Bouton } from '../components/ui'
+import { Container, Bouton, estUnMontant } from '../components/ui'
 import { icones, SeparateurCoeur } from '../components/icons'
 import { univers, heroPrestations } from '../data/site'
 import { prestations } from '../data/prestations'
@@ -75,8 +75,14 @@ function CarteUnivers({ item }) {
             {details.intro}
           </p>
           <p className="mt-6 sm:mt-7">
-            <span className="eyebrow block text-ink-soft">À partir de</span>
-            <span className="mt-1 block font-display text-3xl text-taupe-dark">
+            {estUnMontant(prixMini) && (
+              <span className="eyebrow block text-ink-soft">À partir de</span>
+            )}
+            <span
+              className={`block font-display text-3xl text-taupe-dark ${
+                estUnMontant(prixMini) ? 'mt-1' : ''
+              }`}
+            >
               {prixMini}
             </span>
           </p>
