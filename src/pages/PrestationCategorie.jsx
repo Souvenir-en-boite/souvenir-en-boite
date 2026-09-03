@@ -223,7 +223,7 @@ function CarteFormule({ formule, cleUnivers, ouverte, basculer }) {
 
 function OptionVideo({ option }) {
   return (
-    <Container className="py-10 sm:py-12 lg:py-16">
+    <Container className="pt-10 sm:pt-12 lg:pt-16">
       <div className="grid items-stretch gap-0 border border-line bg-cream lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         <img
           src={option.image}
@@ -320,7 +320,7 @@ export default function PrestationCategorie({ cle }) {
 
       {details.optionVideo && <OptionVideo option={details.optionVideo} />}
 
-      <Container className="pb-14 lg:pb-20">
+      <Container className="pt-10 pb-14 sm:pt-12 lg:pt-16 lg:pb-20">
         <div className="flex flex-col gap-5 border-l-2 border-taupe bg-sand px-6 py-6 sm:gap-6 sm:px-7 sm:py-7 lg:flex-row lg:items-center lg:gap-10 lg:px-10">
           <Info className="h-7 w-7 shrink-0 text-taupe-dark" strokeWidth={1.2} aria-hidden="true" />
           <div className="lg:flex-1">
