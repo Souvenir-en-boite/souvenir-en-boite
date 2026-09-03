@@ -68,7 +68,7 @@ export default function Contact() {
         Sur mobile la photo reste en `cover` : à sa largeur naturelle elle
         laisserait de larges bandes vides sur un écran étroit.
       */}
-      <section className="relative isolate flex min-h-[20rem] items-end overflow-hidden bg-[#0e0c0b] lg:min-h-[25rem] lg:items-center">
+      <section className="relative isolate flex min-h-[17rem] items-end overflow-hidden bg-[#0e0c0b] lg:min-h-[25rem] lg:items-center">
         <img
           src={heroContact.src}
           alt={heroContact.alt}
@@ -82,7 +82,7 @@ export default function Contact() {
           className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(14,12,11,.96)_0%,rgba(14,12,11,.92)_50%,rgba(14,12,11,.62)_78%,rgba(14,12,11,.35)_100%)] lg:bg-none"
         />
 
-        <Container className="py-12 lg:py-14">
+        <Container className="py-9 lg:py-14">
           <div className="lg:max-w-[24rem]">
             <p className="eyebrow text-cream/85">Parlons de vos souvenirs</p>
             <h1 className="mt-4 font-display text-4xl text-cream sm:text-5xl">
@@ -97,16 +97,16 @@ export default function Contact() {
         </Container>
       </section>
 
-      <Container className="py-14 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-14">
+      <Container className="py-10 lg:py-20">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-14">
           {/* Coordonnées */}
-          <aside className="bg-sand p-8 lg:p-10">
+          <aside className="bg-sand p-6 sm:p-8 lg:p-10">
             <h2 className="eyebrow text-ink">Restons en contact</h2>
             <span className="mt-4 block h-px w-12 bg-taupe" />
 
-            <ul className="mt-8 flex flex-col gap-8">
+            <ul className="mt-6 flex flex-col gap-5 lg:mt-8 lg:gap-8">
               <li className="flex items-start gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-taupe">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-taupe sm:h-11 sm:w-11">
                   <Phone className="h-4 w-4 text-taupe-dark" aria-hidden="true" />
                 </span>
                 <div>
@@ -120,7 +120,7 @@ export default function Contact() {
                 </div>
               </li>
               <li className="flex items-start gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-taupe">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-taupe sm:h-11 sm:w-11">
                   <MapPin className="h-4 w-4 text-taupe-dark" aria-hidden="true" />
                 </span>
                 <div>
@@ -130,15 +130,17 @@ export default function Contact() {
               </li>
             </ul>
 
-            <h2 className="eyebrow mt-12 text-ink">Suivez mon univers</h2>
-            <span className="mt-4 block h-px w-12 bg-taupe" />
-            <ul className="mt-6 flex gap-3">
+            <h2 className="eyebrow mt-7 text-ink max-lg:sr-only lg:mt-12">
+              Suivez mon univers
+            </h2>
+            <span className="mt-4 hidden h-px w-12 bg-taupe lg:block" />
+            <ul className="mt-7 flex gap-3 lg:mt-6">
               <li>
                 <a
                   href={site.reseaux.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-taupe text-taupe-dark transition-colors hover:bg-taupe hover:text-ink"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-taupe text-taupe-dark transition-colors hover:bg-taupe hover:text-ink sm:h-12 sm:w-12"
                 >
                   <Instagram className="h-5 w-5" aria-hidden="true" />
                   <span className="sr-only">Instagram (nouvelle fenêtre)</span>
@@ -149,7 +151,7 @@ export default function Contact() {
                   href={site.reseaux.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-taupe text-taupe-dark transition-colors hover:bg-taupe hover:text-ink"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-taupe text-taupe-dark transition-colors hover:bg-taupe hover:text-ink sm:h-12 sm:w-12"
                 >
                   <Facebook className="h-5 w-5" aria-hidden="true" />
                   <span className="sr-only">Facebook (nouvelle fenêtre)</span>
