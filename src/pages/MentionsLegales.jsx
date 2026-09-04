@@ -37,7 +37,7 @@ export default function MentionsLegales() {
             <strong>Responsable de la publication :</strong> {site.photographe}{' '}
             Fenehari
           </li>
-          <li><strong>Statut juridique :</strong> Auto-entrepreneur</li>
+          <li><strong>Statut juridique :</strong> Auto-entrepreneuse</li>
           <li><strong>Adresse du siège :</strong> [ADRESSE POSTALE — EN ATTENTE]</li>
           <li><strong>SIRET :</strong> 877 626 705 00025</li>
           <li><strong>Numéro de TVA intracommunautaire :</strong> [EN ATTENTE]</li>

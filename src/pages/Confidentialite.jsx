@@ -16,7 +16,7 @@ export default function Confidentialite() {
         chapo="Votre vie privée est importante pour moi. Cette page explique comment vos données sont collectées, utilisées et protégées lorsque vous visitez ce site ou réservez une séance."
       >
         {/* ⚠️ À METTRE À JOUR à chaque modification du traitement des données. */}
-        <p><strong>Dernière mise à jour :</strong> 03/09/2026</p>
+        <p><strong>Dernière mise à jour :</strong> 04/09/2026</p>
 
         <h2>1. Données collectées</h2>
         <p>Lorsque vous me contactez via le formulaire, je recueille :</p>
