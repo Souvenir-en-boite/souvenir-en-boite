@@ -61,6 +61,7 @@ export default function APropos() {
         titre="À propos"
         description="Je suis Sarah, photographe et vidéaste de mariage. Mon objectif : figer la magie de vos moments les plus précieux avec authenticité, douceur et émotion."
         image="/assets/picture/sarah.avif"
+        imageAlt="Sarah, photographe, en portrait noir et blanc, son appareil photo à la main"
         type="profile"
       />
       <Head>

@@ -16,6 +16,7 @@ const html = []
 
 let echecs = 0
 const aVerifier = []
+const apercus = []
 const ko = (f, m) => { console.log('  ✗ ' + f.replace('dist', '') + ' — ' + m); echecs++ }
 const ignorer = (f) =>
   f.includes('/tarifs/') || f.includes('politque') || f === 'dist/404.html'
@@ -48,6 +49,27 @@ for (const f of html.sort()) {
       // suffit pas, encore faut-il qu'ils correspondent au fichier.
       aVerifier.push({ f, src, chemin, l: +l, h: +h })
     }
+  }
+
+  // Aperçu de partage. Facebook, Messenger, WhatsApp et LinkedIn ne lisent
+  // pas l'AVIF : une og:image dans ce format donne un aperçu sans visuel,
+  // sans le moindre message d'erreur. On exige donc un JPEG ou un PNG, et des
+  // dimensions déclarées conformes au fichier.
+  const og = (n) => doc.querySelector(`meta[property="og:${n}"]`)?.getAttribute('content') || ''
+  for (const n of ['title', 'description', 'url', 'image']) {
+    if (!og(n)) ko(f, 'og:' + n + ' absente ou vide')
+  }
+  const apercu = og('image')
+  if (apercu && !apercu.startsWith('http')) {
+    ko(f, 'og:image doit être une adresse absolue : ' + apercu)
+  } else if (apercu) {
+    apercus.push({
+      f,
+      chemin: new URL(apercu).pathname,
+      l: +og('image:width'),
+      h: +og('image:height'),
+      alt: og('image:alt'),
+    })
   }
 
   for (const s of doc.querySelectorAll('script[type="application/ld+json"]')) {
@@ -87,6 +109,30 @@ for (const { f, src, chemin, l, h } of aVerifier) {
   }
 }
 
+// --- Images d'aperçu de partage ------------------------------------------
+// Pour (re)générer ces fichiers : node scripts/generer-images-partage.mjs
+const partages = new Map()
+for (const { f, chemin, l, h, alt } of apercus) {
+  if (!partages.has(chemin)) {
+    try {
+      const m = await sharp('public' + chemin).metadata()
+      partages.set(chemin, m)
+    } catch {
+      partages.set(chemin, null)
+    }
+  }
+  const m = partages.get(chemin)
+  if (!m) { ko(f, 'og:image introuvable dans public/ : ' + chemin); continue }
+  if (m.format !== 'jpeg' && m.format !== 'png') {
+    ko(f, `og:image en ${m.format} : illisible par Facebook et Messenger (${chemin})`)
+  }
+  if (!l || !h) ko(f, 'og:image:width / og:image:height absentes')
+  else if (m.width !== l || m.height !== h) {
+    ko(f, `og:image annoncée ${l}x${h} mais fichier ${m.width}x${m.height} : ${chemin}`)
+  }
+  if (!alt) ko(f, 'og:image:alt absente : ' + chemin)
+}
+
 // --- Contrôle des AVIF ---------------------------------------------------
 // `sips -s format avif` produit des AVIF découpés en grille de tuiles que
 // Chrome ne décode pas toujours : l'image apparaît alors vide, sans erreur,
@@ -113,7 +159,7 @@ for (const f of avif) {
 }
 
 console.log(
-  '\n' + html.length + ' fichiers HTML, ' + tailles.size + ' images vérifiées, ' + avif.length + ' AVIF — ' +
+  '\n' + html.length + ' fichiers HTML, ' + tailles.size + ' images vérifiées, ' + partages.size + ' aperçus de partage, ' + avif.length + ' AVIF — ' +
   (echecs === 0 ? 'aucun problème détecté ✓' : echecs + ' problème(s)')
 )
 process.exit(echecs === 0 ? 0 : 1)

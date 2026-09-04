@@ -36,6 +36,7 @@ export default function PortfolioCategorie({ cle }) {
         titre={meta[cle].titre}
         description={meta[cle].description}
         image={item.couverture}
+        imageAlt={item.couvertureAlt}
       />
 
       <Container className="pt-14 pb-12 lg:pt-20">

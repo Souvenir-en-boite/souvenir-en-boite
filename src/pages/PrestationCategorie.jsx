@@ -298,6 +298,7 @@ export default function PrestationCategorie({ cle }) {
         titre={meta[cle].titre}
         description={meta[cle].description}
         image={details.hero.src}
+        imageAlt={details.hero.alt}
       />
       <DonneesFormules cle={cle} details={details} />
 

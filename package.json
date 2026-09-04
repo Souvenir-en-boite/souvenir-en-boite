@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite-react-ssg build && node scripts/generate-sitemap.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "verifier": "node scripts/verifier-html.mjs",
+    "images-partage": "node scripts/generer-images-partage.mjs"
   },
   "dependencies": {
     "@fontsource-variable/cormorant-garamond": "^5.3.0",
