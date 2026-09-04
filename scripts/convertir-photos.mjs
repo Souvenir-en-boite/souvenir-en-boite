@@ -2,8 +2,15 @@
 //
 //   node scripts/convertir-photos.mjs <fichiers ou dossier> --sortie <dossier> [options]
 //
-// Options : --largeur <px>   largeur maximale (défaut 1600)
-//           --qualite <1-100> qualité AVIF (défaut 58)
+// Options : --largeur <px>    largeur maximale (défaut 1600)
+//           --qualite <1-100>  qualité AVIF (défaut 58)
+//           --prefixe <nom>    renomme en <nom>-1.avif, <nom>-2.avif, ...
+//           --depart <n>       premier numéro de la série (défaut 1)
+//
+// Les noms de fichiers livrés par Pixieset contiennent des parenthèses, qui
+// n'ont rien à faire dans une URL : --prefixe les remplace par une série
+// numérotée. --depart sert à compléter une galerie existante sans renommer ce
+// qui est déjà en ligne — les anciennes URL restent valides pour Google.
 //
 // Exemple, pour une galerie complète :
 //   node scripts/convertir-photos.mjs ~/Downloads/pixieset \
@@ -25,10 +32,12 @@ const lire = (nom, defaut) => {
 const sortie = lire('--sortie', null)
 const largeurMax = Number(lire('--largeur', 1600))
 const qualite = Number(lire('--qualite', 58))
+const prefixe = lire('--prefixe', null)
+const depart = Number(lire('--depart', 1))
 const entrees = args.filter((a) => !a.startsWith('--') && args[args.indexOf(a) - 1]?.startsWith('--') !== true)
 
 if (!sortie || entrees.length === 0) {
-  console.error('Usage : node scripts/convertir-photos.mjs <fichiers|dossier> --sortie <dossier> [--largeur 1600] [--qualite 58]')
+  console.error('Usage : node scripts/convertir-photos.mjs <fichiers|dossier> --sortie <dossier> [--largeur 1600] [--qualite 58] [--prefixe nom] [--depart 1]')
   process.exit(1)
 }
 
@@ -50,8 +59,10 @@ await mkdir(resolve(sortie), { recursive: true })
 console.log(`\n${fichiers.length} photo(s) — largeur max ${largeurMax}px, qualité ${qualite}\n`)
 
 const resultats = []
-for (const src of fichiers) {
-  const nom = basename(src, extname(src)) + '.avif'
+for (const [i, src] of fichiers.entries()) {
+  const nom = prefixe
+    ? `${prefixe}-${depart + i}.avif`
+    : basename(src, extname(src)) + '.avif'
   const dest = join(sortie, nom)
   const image = sharp(src).rotate() // applique l'orientation EXIF
   const meta = await image.metadata()
