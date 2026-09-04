@@ -19,13 +19,28 @@ export default function MentionsLegales() {
       />
       <PageTexte titre="Mentions légales">
         <h2>Éditeur du site</h2>
+        {/*
+          ⚠️ DEUX CHAMPS RESTENT À RENSEIGNER avant toute mise en ligne : adresse
+          du siège et numéro de TVA. La cliente change de statut, ils ne sont pas
+          encore arrêtés (au 2026-09-04).
+
+          L'adresse du siège est OBLIGATOIRE (article 6-III-1 de la LCEN) : la
+          page n'est pas conforme tant qu'elle manque.
+
+          Le numéro de TVA ne s'affiche que si l'entreprise en a un. En franchise
+          en base, on porte à la place « TVA non applicable, article 293 B du
+          CGI ». Le changement de statut en cours décidera lequel des deux.
+        */}
         <ul>
           <li><strong>Dénomination :</strong> {site.nom}</li>
-          <li><strong>Responsable de la publication :</strong> {site.photographe} [NOM DE FAMILLE À COMPLÉTER]</li>
-          <li><strong>Statut juridique :</strong> [ex. entrepreneur individuel / micro-entreprise — À COMPLÉTER]</li>
-          <li><strong>Adresse du siège :</strong> [ADRESSE POSTALE À COMPLÉTER]</li>
-          <li><strong>SIRET :</strong> [NUMÉRO SIRET À COMPLÉTER]</li>
-          <li><strong>Numéro de TVA intracommunautaire :</strong> [À COMPLÉTER ou mentionner « TVA non applicable, article 293 B du CGI »]</li>
+          <li>
+            <strong>Responsable de la publication :</strong> {site.photographe}{' '}
+            Fenehari
+          </li>
+          <li><strong>Statut juridique :</strong> Auto-entrepreneur</li>
+          <li><strong>Adresse du siège :</strong> [ADRESSE POSTALE — EN ATTENTE]</li>
+          <li><strong>SIRET :</strong> 877 626 705 00025</li>
+          <li><strong>Numéro de TVA intracommunautaire :</strong> [EN ATTENTE]</li>
           <li><strong>Téléphone :</strong> <a href={`tel:${site.telephoneLien}`}>{site.telephone}</a></li>
           <li><strong>E-mail :</strong> <a href={`mailto:${site.email}`}>{site.email}</a></li>
         </ul>
