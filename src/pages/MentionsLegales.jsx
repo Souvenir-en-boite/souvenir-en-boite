@@ -3,10 +3,11 @@ import { PageTexte } from '../components/PageTexte'
 import { site } from '../data/site'
 
 /**
- * ⚠️ À COMPLÉTER AVANT MISE EN LIGNE
- * Les mentions légales sont obligatoires (article 6 de la LCEN). Les champs
- * entre crochets doivent être renseignés par la cliente : sans eux, la page
- * ne remplit pas son obligation.
+ * Mentions légales, obligatoires au titre de l'article 6 de la LCEN.
+ *
+ * Toutes les informations exigées sont renseignées (au 2026-09-04). Seule la
+ * ligne « Numéro de TVA » a été retirée volontairement — voir le commentaire
+ * au-dessus de la liste.
  */
 export default function MentionsLegales() {
   return (
@@ -20,16 +21,14 @@ export default function MentionsLegales() {
       <PageTexte titre="Mentions légales">
         <h2>Éditeur du site</h2>
         {/*
-          ⚠️ DEUX CHAMPS RESTENT À RENSEIGNER avant toute mise en ligne : adresse
-          du siège et numéro de TVA. La cliente change de statut, ils ne sont pas
-          encore arrêtés (au 2026-09-04).
+          La ligne « Numéro de TVA intracommunautaire » a été RETIRÉE
+          volontairement : la cliente change de statut et son régime n'est pas
+          arrêté (au 2026-09-04). Ce champ n'est obligatoire que si l'entreprise
+          possède un numéro, la page reste donc conforme sans lui.
 
-          L'adresse du siège est OBLIGATOIRE (article 6-III-1 de la LCEN) : la
-          page n'est pas conforme tant qu'elle manque.
-
-          Le numéro de TVA ne s'affiche que si l'entreprise en a un. En franchise
-          en base, on porte à la place « TVA non applicable, article 293 B du
-          CGI ». Le changement de statut en cours décidera lequel des deux.
+          À remettre une fois le statut fixé, avec l'une des deux mentions :
+          le numéro si elle est assujettie, ou « TVA non applicable, article
+          293 B du CGI » si elle relève de la franchise en base.
         */}
         <ul>
           <li><strong>Dénomination :</strong> {site.nom}</li>
@@ -43,7 +42,6 @@ export default function MentionsLegales() {
             La Chapelle-Rablais
           </li>
           <li><strong>SIRET :</strong> 877 626 705 00025</li>
-          <li><strong>Numéro de TVA intracommunautaire :</strong> [EN ATTENTE]</li>
           <li><strong>Téléphone :</strong> <a href={`tel:${site.telephoneLien}`}>{site.telephone}</a></li>
           <li><strong>E-mail :</strong> <a href={`mailto:${site.email}`}>{site.email}</a></li>
         </ul>
