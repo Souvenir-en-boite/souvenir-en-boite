@@ -66,6 +66,10 @@ function Visionneuse({ photos, index, setIndex, legende }) {
   const total = photos.length
   const photo = photos[index]
 
+  // Point de départ du geste tactile, pour distinguer un balayage d'un simple
+  // appui.
+  const departGeste = useRef(null)
+
   const fermer = useCallback(() => setIndex(null), [setIndex])
   const precedente = useCallback(
     () => setIndex((i) => (i - 1 + total) % total),
@@ -75,6 +79,25 @@ function Visionneuse({ photos, index, setIndex, legende }) {
     () => setIndex((i) => (i + 1) % total),
     [setIndex, total],
   )
+
+  const debutGeste = (e) => {
+    const t = e.changedTouches[0]
+    departGeste.current = { x: t.clientX, y: t.clientY }
+  }
+
+  const finGeste = (e) => {
+    const depart = departGeste.current
+    departGeste.current = null
+    if (!depart) return
+    const t = e.changedTouches[0]
+    const dx = t.clientX - depart.x
+    const dy = t.clientY - depart.y
+    // Seuil de 50 px pour ignorer les appuis, et geste plus horizontal que
+    // vertical pour ne pas confondre avec un défilement.
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return
+    if (dx < 0) suivante()
+    else precedente()
+  }
 
   useEffect(() => {
     const elementPrecedent = document.activeElement
@@ -133,11 +156,21 @@ function Visionneuse({ photos, index, setIndex, legende }) {
         </button>
       </div>
 
-      <div className="flex min-h-0 flex-1 items-center justify-center gap-2 px-2 pb-6 sm:gap-6 sm:px-6">
+      {/*
+        Sous 640 px, les flèches passent en superposition sur les bords : dans
+        le flux, elles amputaient l'image d'une centaine de pixels de largeur.
+        Le balayage devient le geste principal, elles restent le repli visible
+        — et le seul moyen accessible à qui ne peut pas balayer.
+      */}
+      <div
+        className="relative flex min-h-0 flex-1 items-center justify-center px-3 pb-6 sm:gap-6 sm:px-6"
+        onTouchStart={debutGeste}
+        onTouchEnd={finGeste}
+      >
         <button
           type="button"
           onClick={precedente}
-          className="shrink-0 p-3 text-cream-soft transition-opacity hover:opacity-70"
+          className="absolute left-1 z-10 shrink-0 rounded-full bg-night/45 p-3 text-cream-soft backdrop-blur-sm transition-opacity hover:opacity-70 sm:static sm:bg-transparent sm:backdrop-blur-none"
         >
           <ChevronLeft className="h-8 w-8" aria-hidden="true" />
           <span className="sr-only">Photo précédente</span>
@@ -154,7 +187,7 @@ function Visionneuse({ photos, index, setIndex, legende }) {
         <button
           type="button"
           onClick={suivante}
-          className="shrink-0 p-3 text-cream-soft transition-opacity hover:opacity-70"
+          className="absolute right-1 z-10 shrink-0 rounded-full bg-night/45 p-3 text-cream-soft backdrop-blur-sm transition-opacity hover:opacity-70 sm:static sm:bg-transparent sm:backdrop-blur-none"
         >
           <ChevronRight className="h-8 w-8" aria-hidden="true" />
           <span className="sr-only">Photo suivante</span>
