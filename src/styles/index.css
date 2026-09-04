@@ -65,6 +65,22 @@
 
 @layer components {
   /*
+   * Entrée d'une photo dans la visionneuse : elle arrive du côté opposé au
+   * geste, ce qui donne le sens du déplacement. Le réglage système « réduire
+   * les animations » ramène la durée à 0,01 ms, comme pour le reste du site.
+   */
+  @keyframes entre-de-droite {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes entre-de-gauche {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .entre-de-droite { animation: entre-de-droite 260ms ease-out; }
+  .entre-de-gauche { animation: entre-de-gauche 260ms ease-out; }
+
+  /*
    * Fond le bord gauche d'une image dans le fond de section, sans arête.
    * Le masque porte sur l'image elle-même : il suit donc son bord réel, quelle
    * que soit la largeur de l'écran. Un panneau flouté posé à un pourcentage
