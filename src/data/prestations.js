@@ -111,8 +111,15 @@ export const prestations = {
     hero: {
       src: '/assets/picture/prestations/hero-prestations-grossesse.avif',
       width: 1920,
-      height: 1280,
-      alt: 'Future maman allongée en studio sur fond blanc, aux côtés de son compagnon et de leur petite fille',
+      height: 1204,
+      alt: 'Future maman assise en studio, veste noire ouverte sur son ventre rond, dans une lumière chaude',
+      // Les cartes de tarifs remontent sur la photo : seuls les ~410 px du haut
+      // du bandeau restent visibles en bureau. Centré, on n'y voyait que le
+      // buste et la grossesse ne se lisait pas. À 88 % le ventre arrive dans
+      // cette bande, la veste noire donnant le contraste au texte.
+      // Sans effet en mobile, où le bandeau est plus haut que large : l'image
+      // y est recadrée horizontalement et s'affiche en entier sur sa hauteur.
+      cadrage: 'center 88%',
     },
     intro:
       "Parce que ce petit miracle qui grandit en vous mérite d'être célébré, je crée des images en studio ou en extérieur qui révèlent toute la beauté de ce moment si spécial.",
