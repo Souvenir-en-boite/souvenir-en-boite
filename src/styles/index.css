@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* Polices auto-hébergées : aucune requête vers Google Fonts (pas de transfert
+   d'IP vers un tiers, donc pas de point de friction RGPD), et pas de blocage
+   du rendu par un domaine externe. */
+@import "@fontsource-variable/cormorant-garamond";
+@import "@fontsource-variable/montserrat";
+
+@theme {
+  /* Palette — tous les couples texte/fond utilisés sont vérifiés WCAG AA.
+     Le texte se pose en `ink` sur `taupe` (6.76:1) et jamais en blanc (2.27:1). */
+  --color-cream: #faf7f2;
+  --color-sand: #ede1d4;
+  --color-taupe: #c2a084;
+  --color-taupe-dark: #8a6a4f;
+  --color-gold-light: #d8b99a;
+  --color-ink: #221f1c;
+  --color-ink-soft: #5b5249;
+  --color-line: #e0d3c4;
+  --color-night: #22201d;
+  --color-cream-soft: #f3ede4;
+
+  --font-display: "Cormorant Garamond Variable", Cormorant Garamond, Georgia, serif;
+  --font-sans: "Montserrat Variable", Montserrat, ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* Anneau de focus visible au clavier uniquement : indispensable pour la
+     navigation sans souris, sans polluer le clic à la souris. */
+  :focus-visible {
+    outline: 2px solid var(--color-taupe-dark);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Respecte le réglage système « réduire les animations ». */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /*
+   * Entrée d'une photo dans la visionneuse : elle arrive du côté opposé au
+   * geste, ce qui donne le sens du déplacement. Le réglage système « réduire
+   * les animations » ramène la durée à 0,01 ms, comme pour le reste du site.
+   */
+  @keyframes entre-de-droite {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes entre-de-gauche {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .entre-de-droite { animation: entre-de-droite 260ms ease-out; }
+  .entre-de-gauche { animation: entre-de-gauche 260ms ease-out; }
+
+  /*
+   * Fond le bord gauche d'une image dans le fond de section, sans arête.
+   * Le masque porte sur l'image elle-même : il suit donc son bord réel, quelle
+   * que soit la largeur de l'écran. Un panneau flouté posé à un pourcentage
+   * fixe, lui, laissait apparaître le fond plein dès que la mise en page
+   * bougeait.
+   */
+  @media (width >= 64rem) {
+    .fondu-vers-la-gauche {
+      -webkit-mask-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.25) 16%,
+        rgba(0, 0, 0, 0.75) 30%,
+        #000 42%
+      );
+      mask-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.25) 16%,
+        rgba(0, 0, 0, 0.75) 30%,
+        #000 42%
+      );
+    }
+  }
+
+  /* Libellé en petites capitales espacées (« PHOTOGRAPHE PROFESSIONNELLE ») */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+}

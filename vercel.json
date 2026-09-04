@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/tarifs", "destination": "/prestations", "permanent": true },
+    { "source": "/tarifs/mariage", "destination": "/prestations/mariage", "permanent": true },
+    { "source": "/tarifs/grossesse", "destination": "/prestations/grossesse", "permanent": true },
+    { "source": "/tarifs/naissance", "destination": "/prestations/naissance", "permanent": true },
+    { "source": "/politque-de-confidentialite", "destination": "/politique-de-confidentialite", "permanent": true }
+  ]
+}

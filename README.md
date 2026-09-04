@@ -1,70 +1,109 @@
-# Getting Started with Create React App
+# Souvenir en boîte
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Site vitrine de Sarah, photographe mariage, grossesse et naissance.
 
-## Available Scripts
+## Démarrer
 
-In the project directory, you can run:
+```bash
+npm install
+npm run dev        # développement, sur http://localhost:5173
+npm run build      # génère le site dans dist/
+npm run preview    # sert dist/ pour vérifier le résultat du build
+```
 
-### `npm start`
+## Comment ça marche
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Le site est **généré statiquement** : `npm run build` produit un vrai fichier
+HTML par page, contenu compris. Ce n'est pas un détail — c'est ce qui permet
+aux moteurs de recherche et aux aperçus de partage (Facebook, WhatsApp,
+LinkedIn, qui n'exécutent pas JavaScript) de lire chaque page.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| | |
+|---|---|
+| Build | [Vite](https://vite.dev) + [vite-react-ssg](https://github.com/Daydreamer-riri/vite-react-ssg) |
+| Interface | React 18, react-router 6 |
+| Styles | Tailwind CSS 4 (configuré dans `src/styles/index.css`) |
+| Polices | Cormorant Garamond + Montserrat, **auto-hébergées** via Fontsource |
 
-### `npm test`
+Les polices sont servies depuis le site lui-même : aucune requête vers Google
+Fonts, donc aucun transfert d'adresse IP vers un tiers (RGPD) et aucun domaine
+externe à attendre au chargement.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Où modifier quoi
 
-### `npm run build`
+| Pour changer… | Fichier |
+|---|---|
+| Téléphone, zone d'intervention, réseaux sociaux, menu | `src/data/site.js` |
+| Formules et prix | `src/data/prestations.js` |
+| Photos des galeries | `src/data/galeries.js` |
+| Avis clients | `src/data/avis.js` |
+| Couleurs et typographies | `src/styles/index.css` (bloc `@theme`) |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Convertir des photos
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Ne jamais utiliser `sips -s format avif`.** Il produit des AVIF découpés en
+grille de tuiles que Chrome ne décode pas toujours : l'image s'affiche vide,
+sans aucune erreur, avec des dimensions correctes. Le script de vérification
+refuse désormais ces fichiers.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Pour convertir les photos livrées par la cliente :
 
-### `npm run eject`
+```bash
+node scripts/convertir-photos.mjs ~/Downloads/pixieset \
+  --sortie public/assets/picture/portfolio-mariage --largeur 1600
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Options : `--largeur` (défaut 1600) et `--qualite` (défaut 58). Le script
+applique l'orientation EXIF, redimensionne sans jamais agrandir, et affiche
+les dimensions finales de chaque fichier — celles à reporter dans les données.
+Ajouter `--donnees` pour obtenir directement les lignes à coller.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Repères utilisés sur l'accueil : 1920 px / qualité 55 pour l'image d'ouverture,
+1000 px / qualité 60 pour les cartes.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Ajouter des photos à une galerie
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+`src/data/galeries.js` attend pour chaque photo ses dimensions réelles en
+pixels — celles affichées par le script de conversion. Elles servent à réserver
+la place de l'image avant son chargement (pas de saut de mise en page) et à
+décider de son format d'affichage : une photo **horizontale** occupe deux
+colonnes de la mosaïque, une verticale une seule.
 
-## Learn More
+### Activer les avis clients
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Ajouter des entrées dans `src/data/avis.js` (le format est décrit en
+commentaire). La section apparaît alors automatiquement sur l'accueil ;
+tant que le tableau est vide, elle reste masquée.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Vérifications automatiques
 
-### Code Splitting
+```bash
+npm run build && node scripts/verifier-html.mjs
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Contrôle sur le HTML réellement généré : un `<h1>` unique par page, `alt` et
+dimensions sur chaque image, hiérarchie de titres sans niveau sauté, données
+structurées valides, aucun lien sans intitulé.
 
-### Analyzing the Bundle Size
+## Mise en ligne
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Le site est déployé sur **Vercel** (`souvenir-en-boite.vercel.app`). La
+configuration est dans `vercel.json` : elle impose `dist` comme dossier de
+sortie et désactive la détection automatique, qui identifiait l'ancien projet
+comme Create React App et cherchait un dossier `build`.
 
-### Making a Progressive Web App
+Les redirections des anciennes adresses y sont déclarées aussi : Vercel ne lit
+pas le fichier `_redirects`, qui est un format Netlify / Cloudflare Pages.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Le build produit également :
 
-### Advanced Configuration
+- `sitemap.xml` et `robots.txt` ;
+- `_redirects` — redirections 301 des anciennes adresses (`/tarifs/*` vers
+  `/prestations/*`), comprises par Netlify et Cloudflare Pages ;
+- des pages de redirection HTML pour les hébergeurs sans fichier de
+  configuration ;
+- `404.html`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> **Avant la première mise en ligne**, renseigner l'adresse réelle du site dans
+> `site.url` (`src/data/site.js`) : elle sert aux liens canoniques, aux aperçus
+> de partage et au plan du site.

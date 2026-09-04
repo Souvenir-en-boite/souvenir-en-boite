@@ -1,0 +1,111 @@
+// Point unique de vérité pour les coordonnées et la navigation.
+// Modifier ici met à jour l'en-tête, le pied de page, la page contact,
+// les données structurées Google et le plan du site.
+
+export const site = {
+  nom: 'Souvenir en boîte',
+  photographe: 'Sarah',
+  // ⚠️ À confirmer avant mise en ligne : l'URL réelle du site.
+  // Elle sert aux liens canoniques, aux aperçus de partage et au sitemap.
+  url: 'https://www.souvenir-en-boite.fr',
+  baseline: 'Photographe mariage, grossesse et naissance',
+  telephone: '07 44 82 37 19',
+  telephoneLien: '+33744823719',
+  email: 'souvenir-en-boite@hotmail.com',
+  zone: "France entière, déplacement à l'étranger sur devis.",
+  reseaux: {
+    instagram: 'https://www.instagram.com/souvenir_en_boite/',
+    facebook: 'https://www.facebook.com/sarahphotomariage/photos',
+  },
+}
+
+
+// Les trois univers, utilisés par l'accueil, le portfolio et les prestations.
+export const univers = [
+  {
+    cle: 'mariage',
+    titre: 'Mariage',
+    accroche: 'Des instants uniques,\ndes émotions éternelles.',
+    couverture: '/assets/picture/accueil/univers-mariage.avif',
+    largeur: 1000,
+    hauteur: 1500,
+    couvertureAlt:
+      'Mariée en robe brodée et voile de perles, assise dans une voiture de collection blanche devant un château',
+  },
+  {
+    cle: 'grossesse',
+    titre: 'Grossesse',
+    accroche: 'Un moment unique,\nà jamais gravé.',
+    couverture: '/assets/picture/accueil/univers-grossesse.avif',
+    largeur: 974,
+    hauteur: 1290,
+    // Photo très verticale dans une carte presque carrée : sans remonter le
+    // cadrage, le visage sort du champ.
+    cadrage: 'center 18%',
+    couvertureAlt:
+      'Future maman en robe de dentelle crème, posant de profil devant un décor floral en studio',
+  },
+  {
+    cle: 'naissance',
+    titre: 'Naissance',
+    accroche: 'Les premiers instants,\nles plus précieux.',
+    couverture: '/assets/picture/accueil/univers-naissance.avif',
+    largeur: 1000,
+    hauteur: 667,
+    couvertureAlt:
+      'Nouveau-né endormi sur le ventre, les mains sous le menton, portant un bandeau de perles et une brassière en dentelle',
+  },
+]
+
+// Les entrées avec `sousMenu` ouvrent un raccourci vers les trois univers.
+// Le parent reste un lien à part entière : le sous-menu complète, il ne
+// remplace pas.
+export const navigation = [
+  { to: '/', libelle: 'Accueil' },
+  {
+    to: '/portfolio',
+    libelle: 'Portfolio',
+    sousMenu: univers.map((u) => ({ to: `/portfolio/${u.cle}`, libelle: u.titre })),
+  },
+  {
+    to: '/prestations',
+    libelle: 'Prestations',
+    sousMenu: univers.map((u) => ({ to: `/prestations/${u.cle}`, libelle: u.titre })),
+  },
+  { to: '/a-propos', libelle: 'À propos' },
+  { to: '/contact', libelle: 'Contact' },
+]
+
+// Bandeau de la page prestations.
+export const heroPrestations = {
+  src: '/assets/picture/prestations/hero-prestations.avif',
+  width: 976,
+  height: 528,
+  // Sur mobile la photo couvre toute la largeur : on remonte sur les visages.
+  cadrage: 'center 30%',
+  alt: "Couple de mariés assis côte à côte sur un canapé de velours vert, elle en robe brodée, lui en costume beige et nœud papillon",
+}
+
+// Bandeau de la page contact.
+export const heroContact = {
+  src: '/assets/picture/contact/hero-contact.avif',
+  width: 1700,
+  height: 654,
+  // Recadré en 2,6:1, proche du rapport du bandeau où elle s'affiche en pleine
+  // largeur : limite le rognage vertical.
+  alt: "Détails de mariage disposés à plat sur un parquet gris : bouquet de fleurs blanches, gazette des mariés, escarpins vert émeraude, gypsophile et boîte à alliances",
+}
+
+// Image d'ouverture de l'accueil. Une seule photo pour les deux cadrages :
+// elle est assez large pour supporter un recadrage vertical sur mobile, où
+// `objectPosition` recentre le couple.
+export const heroAccueil = {
+  src: '/assets/picture/accueil/hero-mariage.avif',
+  width: 1700,
+  height: 806,
+  // Sur mobile la photo couvre toute la largeur : `58%` recentre le couple,
+  // `20%` remonte sur les visages. Sur grand écran elle s'affiche entière à
+  // droite, donc aucun cadrage n'est nécessaire.
+  cadrage: '58% 20%',
+  alt: "Couple de mariés s'embrassant dans un parc au coucher du soleil, la traîne de la robe déployée dans l'herbe",
+}
