@@ -139,7 +139,6 @@ export const galeries = {
   naissance: [
     // Livraison la plus récente en tête, comme pour la galerie mariage : les
     // photos déjà en ligne gardent leur nom de fichier, donc leur URL.
-    { src: '/assets/picture/portfolio-naissance/portfolio-naissance-22.avif', width: 1600, height: 2879, alt: `Portrait de famille vu de dessus : le papa, la maman, la grande sœur et le nouveau-né endormi` },
     { src: '/assets/picture/portfolio-naissance/portfolio-naissance-23.avif', width: 1600, height: 967, alt: `En noir et blanc, les pieds du nouveau-né posés dans les mains de ses parents` },
     { src: '/assets/picture/portfolio-naissance/portfolio-naissance-24.avif', width: 1600, height: 1621, alt: `Les parents s'embrassent en contre-jour, leur nouveau-né dans les bras` },
     { src: '/assets/picture/portfolio-naissance/portfolio-naissance-25.avif', width: 1600, height: 1067, alt: `Le nouveau-né allongé dans les mains de son papa, en pleine lumière` },
