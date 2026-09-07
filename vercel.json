@@ -10,6 +10,10 @@
     { "source": "/tarifs/mariage", "destination": "/prestations/mariage", "permanent": true },
     { "source": "/tarifs/grossesse", "destination": "/prestations/grossesse", "permanent": true },
     { "source": "/tarifs/naissance", "destination": "/prestations/naissance", "permanent": true },
-    { "source": "/politque-de-confidentialite", "destination": "/politique-de-confidentialite", "permanent": true }
+    { "source": "/politque-de-confidentialite", "destination": "/politique-de-confidentialite", "permanent": true },
+    { "source": "/assets/picture/portfolio-naissance/portfolio-naissance-22.avif", "destination": "/portfolio/naissance", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/assets/picture/portfolio-:univers(mariage|grossesse|naissance)/:fichier", "destination": "/portfolio/:univers" }
   ]
 }

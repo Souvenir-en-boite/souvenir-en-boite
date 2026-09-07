@@ -95,11 +95,20 @@ comme Create React App et cherchait un dossier `build`.
 Les redirections des anciennes adresses y sont déclarées aussi : Vercel ne lit
 pas le fichier `_redirects`, qui est un format Netlify / Cloudflare Pages.
 
+`vercel.json` contient également une règle `rewrites` pour les photos retirées
+d'une galerie : l'adresse d'un fichier absent sous `/assets/picture/portfolio-*`
+sert la galerie correspondante au lieu d'une erreur. Elle ne se déclenche que
+sur un fichier absent — Vercel consulte les `rewrites` après le système de
+fichiers, contrairement aux `redirects`, qui passent avant et masqueraient les
+photos en ligne. Pour une photo dont on sait que l'adresse a circulé, mieux vaut
+ajouter en plus une entrée dans `redirects` : c'est une vraie 301.
+
 Le build produit également :
 
 - `sitemap.xml` et `robots.txt` ;
 - `_redirects` — redirections 301 des anciennes adresses (`/tarifs/*` vers
-  `/prestations/*`), comprises par Netlify et Cloudflare Pages ;
+  `/prestations/*`) et des photos retirées (`/assets/picture/portfolio-*` vers
+  la galerie), comprises par Netlify et Cloudflare Pages ;
 - des pages de redirection HTML pour les hébergeurs sans fichier de
   configuration ;
 - `404.html`.

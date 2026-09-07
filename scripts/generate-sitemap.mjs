@@ -27,6 +27,16 @@ const pages = [
   { chemin: '/contact', priorite: '0.9', frequence: 'yearly' },
 ]
 
+// Photos retirées d'une galerie : leur adresse renvoie vers la galerie plutôt
+// que vers une erreur. Une photo peut avoir circulé sur Instagram ou avoir été
+// envoyée en lien direct à la famille — c'est un lien qu'on ne contrôle plus.
+// La règle ne s'applique qu'aux fichiers absents : Netlify, Cloudflare Pages et
+// Vercel servent toujours un fichier existant avant de consulter leurs règles.
+const photosRetirees = ['mariage', 'grossesse', 'naissance'].map((univers) => [
+  `/assets/picture/portfolio-${univers}/*`,
+  `/portfolio/${univers}`,
+])
+
 // Anciennes adresses du site, conservées pour ne pas casser les liens déjà
 // partagés ni perdre le référencement acquis.
 const redirections = {
@@ -84,7 +94,7 @@ Sitemap: ${site.url}/sitemap.xml
 
 async function genererRedirections() {
   // Fichier compris par Netlify et Cloudflare Pages : vraie redirection 301.
-  const regles = Object.entries(redirections)
+  const regles = [...Object.entries(redirections), ...photosRetirees]
     .map(([de, vers]) => `${de}  ${vers}  301`)
     .join('\n')
   await ecrire('_redirects', `${regles}\n/*  /404.html  404\n`)
