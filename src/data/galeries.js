@@ -4,9 +4,20 @@
 
 export const galeries = {
   mariage: [
-    // Livraison la plus récente en tête : la galerie se lit du plus récent au
-    // plus ancien. Les photos déjà en ligne gardent leur nom de fichier, donc
-    // leur URL — la numérotation est un identifiant, pas un ordre d'affichage.
+    // Les portraits au soleil couchant ouvrent la galerie : c'est la série que
+    // la cliente veut voir en premier. Le reste suit l'ordre habituel, de la
+    // livraison la plus récente à la plus ancienne. Les photos déjà en ligne
+    // gardent leur nom de fichier, donc leur URL — la numérotation est un
+    // identifiant, pas un ordre d'affichage.
+    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-63.avif', width: 1600, height: 1067, alt: `Baiser des mariés dans les herbes hautes, le soleil rasant derrière eux` },
+    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-62.avif', width: 1600, height: 2400, alt: `Les mariés main dans la main dans un champ de hautes herbes, au soleil couchant` },
+    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-64.avif', width: 1600, height: 2045, alt: `La mariée de dos dans un champ doré, la traîne de sa robe étalée derrière elle` },
+    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-65.avif', width: 1600, height: 2400, alt: `La mariée blottie contre l'épaule de son époux, le soleil couchant en contre-jour` },
+    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-67.avif', width: 1600, height: 1067, alt: `Les mariés enlacés au bord d'un champ, la longue traîne posée dans l'herbe` },
+    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-68.avif', width: 1600, height: 1881, alt: `Les mariés se tiennent la main en marchant dans un pré, dos au soleil couchant` },
+    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-69.avif', width: 1600, height: 1797, alt: `Le marié fait tournoyer la mariée qui éclate de rire, au milieu du pré` },
+    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-70.avif', width: 1600, height: 2154, alt: `Le marié penche la mariée en arrière pour l'embrasser, dans la lumière dorée` },
+    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-72.avif', width: 1600, height: 941, alt: `Les mariés enlacés au loin dans un pré, la traîne déroulée derrière eux` },
     { src: '/assets/picture/portfolio-mariage/portfolio-mariage-46.avif', width: 1600, height: 2444, alt: `Les mariés enlacés devant une bâtisse en pierre, le long voile de dentelle retombant sur la robe` },
     { src: '/assets/picture/portfolio-mariage/portfolio-mariage-47.avif', width: 1600, height: 963, alt: `Les mariés enlacés au bout d'une allée de jardin à la française, le voile déployé au vent` },
     { src: '/assets/picture/portfolio-mariage/portfolio-mariage-48.avif', width: 1600, height: 1002, alt: `En noir et blanc, les mariés joue contre joue au bord d'un miroir d'eau bordé d'arbres` },
@@ -23,17 +34,8 @@ export const galeries = {
     { src: '/assets/picture/portfolio-mariage/portfolio-mariage-59.avif', width: 1600, height: 956, alt: `Le cortège fait la fête autour des mariés, cadre doré à la main, sur la pelouse` },
     { src: '/assets/picture/portfolio-mariage/portfolio-mariage-60.avif', width: 1600, height: 1853, alt: `En noir et blanc, tous les invités agglutinés autour des mariés, bras levés` },
     { src: '/assets/picture/portfolio-mariage/portfolio-mariage-61.avif', width: 1600, height: 1040, alt: `La mariée au bras de son père, en contre-jour dans l'embrasure d'une porte vitrée` },
-    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-62.avif', width: 1600, height: 2400, alt: `Les mariés main dans la main dans un champ de hautes herbes, au soleil couchant` },
-    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-63.avif', width: 1600, height: 1067, alt: `Baiser des mariés dans les herbes hautes, le soleil rasant derrière eux` },
-    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-64.avif', width: 1600, height: 2045, alt: `La mariée de dos dans un champ doré, la traîne de sa robe étalée derrière elle` },
-    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-65.avif', width: 1600, height: 2400, alt: `La mariée blottie contre l'épaule de son époux, le soleil couchant en contre-jour` },
     { src: '/assets/picture/portfolio-mariage/portfolio-mariage-66.avif', width: 1600, height: 1067, alt: `Sortie des mariés sous une pluie de pétales et un nuage de fumée blanche` },
-    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-67.avif', width: 1600, height: 1067, alt: `Les mariés enlacés au bord d'un champ, la longue traîne posée dans l'herbe` },
-    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-68.avif', width: 1600, height: 1881, alt: `Les mariés se tiennent la main en marchant dans un pré, dos au soleil couchant` },
-    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-69.avif', width: 1600, height: 1797, alt: `Le marié fait tournoyer la mariée qui éclate de rire, au milieu du pré` },
-    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-70.avif', width: 1600, height: 2154, alt: `Le marié penche la mariée en arrière pour l'embrasser, dans la lumière dorée` },
     { src: '/assets/picture/portfolio-mariage/portfolio-mariage-71.avif', width: 1600, height: 1067, alt: `Les mariés et leurs amis en lunettes de soleil, doigts en V, serrés pour la photo` },
-    { src: '/assets/picture/portfolio-mariage/portfolio-mariage-72.avif', width: 1600, height: 941, alt: `Les mariés enlacés au loin dans un pré, la traîne déroulée derrière eux` },
     { src: '/assets/picture/portfolio-mariage/portfolio-mariage-73.avif', width: 1600, height: 1079, alt: `Grande photo de groupe, bras levés, autour des mariés sur la pelouse` },
     { src: '/assets/picture/portfolio-mariage/portfolio-mariage-74.avif', width: 1600, height: 2583, alt: `Miroir d'accueil du mariage, portrait des mariés et gypsophile à son pied` },
     { src: '/assets/picture/portfolio-mariage/portfolio-mariage-75.avif', width: 1600, height: 2400, alt: `Première danse des mariés en noir et blanc, sous les guirlandes lumineuses` },
