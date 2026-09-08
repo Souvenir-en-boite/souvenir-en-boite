@@ -4,7 +4,6 @@ import { Seo, DonneesStructurees } from '../components/Seo'
 import { Container, Bouton, Eyebrow } from '../components/ui'
 import { IconAppareilPhoto } from '../components/icons'
 import { CarteUnivers } from '../components/CarteUnivers'
-import { Avis } from '../components/Avis'
 import { univers, heroAccueil } from '../data/site'
 
 function Hero() {
@@ -115,7 +114,6 @@ export default function Accueil() {
         </Container>
       </section>
 
-      <Avis />
       <BandeauContact />
     </>
   )
