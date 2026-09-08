@@ -6,6 +6,7 @@ import PortfolioCategorie from './pages/PortfolioCategorie'
 import Prestations from './pages/Prestations'
 import PrestationCategorie from './pages/PrestationCategorie'
 import APropos from './pages/APropos'
+import Avis from './pages/Avis'
 import Contact from './pages/Contact'
 import Merci from './pages/Merci'
 import MentionsLegales from './pages/MentionsLegales'
@@ -35,6 +36,7 @@ export const routes = [
       })),
 
       { path: 'a-propos', element: <APropos /> },
+      { path: 'avis', element: <Avis /> },
       { path: 'contact', element: <Contact /> },
       { path: 'merci', element: <Merci /> },
       { path: 'mentions-legales', element: <MentionsLegales /> },

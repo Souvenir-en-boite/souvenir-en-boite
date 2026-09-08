@@ -51,11 +51,13 @@ export default function Confidentialite() {
           sont hébergées sur le site lui-même.
         </p>
         <p>
-          Une seule ressource provient d'un service externe : le badge
-          « Recommandé sur Mariages.net » affiché en pied de page, chargé depuis
-          les serveurs de Mariages.net. Son affichage transmet votre adresse IP
-          à ce service. Il n'est chargé que si vous faites défiler la page
-          jusqu'au pied de page.
+          Deux ressources proviennent d'un service externe, toutes deux
+          fournies par Mariages.net et chargées depuis leurs serveurs : le
+          badge « Recommandé sur Mariages.net » affiché en pied de page, et les
+          avis clients affichés sur la page Avis. Leur affichage transmet votre
+          adresse IP à ce service. Le badge n'est chargé que si vous faites
+          défiler la page jusqu'au pied de page ; les avis ne le sont que sur
+          la page Avis, et sur aucune autre page du site.
         </p>
 
         <h2>4. Conservation des données</h2>

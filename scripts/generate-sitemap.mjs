@@ -24,6 +24,7 @@ const pages = [
   { chemin: '/prestations/grossesse', priorite: '0.8', frequence: 'monthly' },
   { chemin: '/prestations/naissance', priorite: '0.8', frequence: 'monthly' },
   { chemin: '/a-propos', priorite: '0.7', frequence: 'yearly' },
+  { chemin: '/avis', priorite: '0.7', frequence: 'monthly' },
   { chemin: '/contact', priorite: '0.9', frequence: 'yearly' },
 ]
 

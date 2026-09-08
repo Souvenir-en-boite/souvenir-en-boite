@@ -73,6 +73,7 @@ export const navigation = [
     sousMenu: univers.map((u) => ({ to: `/prestations/${u.cle}`, libelle: u.titre })),
   },
   { to: '/a-propos', libelle: 'À propos' },
+  { to: '/avis', libelle: 'Avis' },
   { to: '/contact', libelle: 'Contact' },
 ]
 
